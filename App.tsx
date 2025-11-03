@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import { User, PublicSystemSettings } from './types';
+import * as userDataService from './services/userDataService';
 import { getPublicSystemSettings } from './services/userDataService';
 import { DashboardView } from './components/Dashboard';
 
@@ -87,11 +88,18 @@ const App: React.FC = () => {
     setView('homepage');
   }, []);
 
-  const handleWelcomeNavigation = useCallback((destination: DashboardView) => {
+  const handleWelcomeNavigation = useCallback(async (destination: DashboardView) => {
     if (user) {
       const updatedUser = { ...user, hasSeenWelcome: true };
       setUser(updatedUser);
       localStorage.setItem('tradePilotUser', JSON.stringify(updatedUser));
+      
+      // CRITICAL: Save to backend storage so it persists across sessions
+      try {
+        await userDataService.updateUserData(user.id, { hasSeenWelcome: true });
+      } catch (error) {
+        console.error('Failed to update hasSeenWelcome in backend:', error);
+      }
     }
     setInitialDashboardView(destination);
     setView('dashboard');
