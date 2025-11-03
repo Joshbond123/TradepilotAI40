@@ -1,0 +1,452 @@
+[
+  {
+    "id": "rev-1",
+    "userId": "user-anonymous-1",
+    "name": "Marcus Thompson",
+    "rating": 5,
+    "text": "I've been using TradePilot AI for three months now, and the results speak for themselves. My portfolio has grown consistently, and I love how hands-off it is. The AI does all the heavy lifting while I focus on my day job.",
+    "createdAt": "2025-10-15T14:22:00.000Z",
+    "adminReply": "Thanks Marcus! We're thrilled to be part of your trading journey. Keep up the great work!"
+  },
+  {
+    "id": "rev-2",
+    "userId": "user-anonymous-2",
+    "name": "Sarah Chen",
+    "rating": 5,
+    "text": "As someone who was skeptical about automated trading, TradePilot AI completely changed my mind. The transparency in how it works and the real-time updates give me peace of mind. Highly recommend!",
+    "createdAt": "2025-10-14T09:15:00.000Z",
+    "adminReply": ""
+  },
+  {
+    "id": "rev-3",
+    "userId": "user-anonymous-3",
+    "name": "David Rodriguez",
+    "rating": 4,
+    "text": "Great platform overall. The interface is clean and easy to navigate. I've seen steady profits since joining. Only minor suggestion would be more educational resources for beginners.",
+    "createdAt": "2025-10-13T18:45:00.000Z",
+    "adminReply": "Thanks for the feedback, David! We're working on expanding our educational content. Stay tuned!"
+  },
+  {
+    "id": "rev-4",
+    "userId": "user-anonymous-4",
+    "name": "Emma Wilson",
+    "rating": 5,
+    "text": "This is exactly what I needed. I don't have time to watch charts all day, and TradePilot handles everything perfectly. The customer support team is also super responsive when I had questions.",
+    "createdAt": "2025-10-12T11:30:00.000Z",
+    "adminReply": ""
+  },
+  {
+    "id": "rev-5",
+    "userId": "user-anonymous-5",
+    "name": "James Park",
+    "rating": 5,
+    "text": "Been in crypto for years and tried multiple bots. TradePilot AI stands out for its consistency and reliability. No wild swings, just steady growth. That's what matters.",
+    "createdAt": "2025-10-11T16:20:00.000Z",
+    "adminReply": "Appreciate the kind words, James! Consistency is our top priority."
+  },
+  {
+    "id": "rev-6",
+    "userId": "user-anonymous-6",
+    "name": "Olivia Martinez",
+    "rating": 4,
+    "text": "I started with the Starter plan to test things out, and I'm impressed. The arbitrage strategy is smart and the profits are real. Planning to upgrade soon!",
+    "createdAt": "2025-10-10T13:05:00.000Z",
+    "adminReply": ""
+  },
+  {
+    "id": "rev-7",
+    "userId": "user-anonymous-7",
+    "name": "Michael Anderson",
+    "rating": 5,
+    "text": "TradePilot AI has been a game changer for my passive income strategy. Set it and forget it really works here. The dashboard makes tracking everything super simple too.",
+    "createdAt": "2025-10-09T10:40:00.000Z",
+    "adminReply": "Thanks Michael! Happy to help you build that passive income stream!"
+  },
+  {
+    "id": "rev-8",
+    "userId": "user-anonymous-8",
+    "name": "Sophia Lee",
+    "rating": 5,
+    "text": "I was nervous about putting my money into automated trading, but the results have been fantastic. The AI catches opportunities I would've never noticed on my own.",
+    "createdAt": "2025-10-08T15:55:00.000Z",
+    "adminReply": ""
+  },
+  {
+    "id": "rev-9",
+    "userId": "user-anonymous-9",
+    "name": "Daniel Brown",
+    "rating": 4,
+    "text": "Solid platform with good returns. The withdrawal process is smooth and fast. Would love to see more detailed analytics, but overall very satisfied.",
+    "createdAt": "2025-10-07T12:10:00.000Z",
+    "adminReply": "Thanks for the suggestion! Enhanced analytics are on our roadmap."
+  },
+  {
+    "id": "rev-10",
+    "userId": "user-anonymous-10",
+    "name": "Isabella Garcia",
+    "rating": 5,
+    "text": "Best decision I made this year. My investment has already doubled in just two months. The AI is clearly doing something right!",
+    "createdAt": "2025-10-06T09:25:00.000Z",
+    "adminReply": ""
+  },
+  {
+    "id": "rev-11",
+    "userId": "user-anonymous-11",
+    "name": "Ethan White",
+    "rating": 5,
+    "text": "I love how transparent everything is. You can see exactly what trades are being made and why. That level of clarity builds trust, and the profits are just icing on the cake.",
+    "createdAt": "2025-10-05T14:50:00.000Z",
+    "adminReply": "Transparency is key! Thanks for trusting us with your trades, Ethan."
+  },
+  {
+    "id": "rev-12",
+    "userId": "user-anonymous-12",
+    "name": "Ava Thomas",
+    "rating": 5,
+    "text": "Finally, a crypto bot that actually delivers. No hype, no promises, just results. I'm earning while I sleep and it feels amazing.",
+    "createdAt": "2025-10-04T11:15:00.000Z",
+    "adminReply": ""
+  },
+  {
+    "id": "rev-13",
+    "userId": "user-anonymous-13",
+    "name": "Noah Johnson",
+    "rating": 4,
+    "text": "Really impressed with the performance. The only thing I'd change is maybe adding more cryptocurrency options to trade with, but what's there works great.",
+    "createdAt": "2025-10-03T16:35:00.000Z",
+    "adminReply": "We're always evaluating new coins to add. Thanks for the input!"
+  },
+  {
+    "id": "rev-14",
+    "userId": "user-anonymous-14",
+    "name": "Mia Robinson",
+    "rating": 5,
+    "text": "The referral program is a nice bonus too. I've shared TradePilot with friends and we're all seeing great results. Win-win!",
+    "createdAt": "2025-10-02T13:20:00.000Z",
+    "adminReply": ""
+  },
+  {
+    "id": "rev-15",
+    "userId": "user-anonymous-15",
+    "name": "Liam Davis",
+    "rating": 5,
+    "text": "I've tried manual trading and it was stressful and unprofitable. TradePilot AI takes all the emotion out of it and just focuses on making money. Perfect for me.",
+    "createdAt": "2025-10-01T10:05:00.000Z",
+    "adminReply": "That's what we're here for! Let the AI handle the stress."
+  },
+  {
+    "id": "rev-16",
+    "userId": "user-anonymous-16",
+    "name": "Charlotte Miller",
+    "rating": 5,
+    "text": "Super easy to get started even if you're not tech-savvy. The onboarding was smooth and support answered all my questions. Making profit consistently now!",
+    "createdAt": "2025-09-30T15:40:00.000Z",
+    "adminReply": ""
+  },
+  {
+    "id": "rev-17",
+    "userId": "user-anonymous-17",
+    "name": "Benjamin Wilson",
+    "rating": 4,
+    "text": "Good returns and reliable service. I appreciate how responsive the team is when there are questions. Keep up the good work!",
+    "createdAt": "2025-09-29T12:25:00.000Z",
+    "adminReply": "Thanks Benjamin! We're always here to help."
+  },
+  {
+    "id": "rev-18",
+    "userId": "user-anonymous-18",
+    "name": "Amelia Moore",
+    "rating": 5,
+    "text": "I started small just to test it out, and now I'm all in. The AI finds arbitrage opportunities faster than any human could. My balance keeps growing!",
+    "createdAt": "2025-09-28T09:50:00.000Z",
+    "adminReply": ""
+  },
+  {
+    "id": "rev-19",
+    "userId": "user-anonymous-19",
+    "name": "Lucas Taylor",
+    "rating": 5,
+    "text": "This platform is legit. I was skeptical at first but after seeing real profits hit my account, I'm a believer. The AI knows what it's doing.",
+    "createdAt": "2025-09-27T14:15:00.000Z",
+    "adminReply": "Thanks for giving us a chance, Lucas! Glad we could prove ourselves."
+  },
+  {
+    "id": "rev-20",
+    "userId": "user-anonymous-20",
+    "name": "Harper Anderson",
+    "rating": 5,
+    "text": "Love the passive income aspect. I check in once a day to see my profits, and it always puts a smile on my face. TradePilot is doing the work for me.",
+    "createdAt": "2025-09-26T11:30:00.000Z",
+    "adminReply": ""
+  },
+  {
+    "id": "rev-21",
+    "userId": "user-anonymous-21",
+    "name": "Alexander Martin",
+    "rating": 4,
+    "text": "Solid platform with consistent gains. The AI is clearly well-programmed. My only wish is for a mobile app, but the web version works fine.",
+    "createdAt": "2025-09-25T16:45:00.000Z",
+    "adminReply": "Mobile app is definitely on our wishlist! Thanks for the feedback."
+  },
+  {
+    "id": "rev-22",
+    "userId": "user-anonymous-22",
+    "name": "Evelyn Jackson",
+    "rating": 5,
+    "text": "I'm not a crypto expert, but TradePilot makes it so easy. The dashboard is intuitive and I can see my earnings grow week by week. Couldn't be happier!",
+    "createdAt": "2025-09-24T13:10:00.000Z",
+    "adminReply": ""
+  },
+  {
+    "id": "rev-23",
+    "userId": "user-anonymous-23",
+    "name": "Sebastian Harris",
+    "rating": 5,
+    "text": "The customer service alone deserves five stars. Quick responses and they actually help. Plus the bot is making me money, so double win.",
+    "createdAt": "2025-09-23T10:35:00.000Z",
+    "adminReply": "We appreciate you, Sebastian! Our team loves helping our users succeed."
+  },
+  {
+    "id": "rev-24",
+    "userId": "user-anonymous-24",
+    "name": "Aria Clark",
+    "rating": 5,
+    "text": "Best crypto investment I've made. The AI handles everything and I just watch my balance increase. It's like having a personal trader working 24/7.",
+    "createdAt": "2025-09-22T15:00:00.000Z",
+    "adminReply": ""
+  },
+  {
+    "id": "rev-25",
+    "userId": "user-anonymous-25",
+    "name": "Jackson Lewis",
+    "rating": 4,
+    "text": "Really happy with my experience so far. Profits are steady and the platform is reliable. Would recommend to anyone looking to get into crypto trading.",
+    "createdAt": "2025-09-21T12:20:00.000Z",
+    "adminReply": ""
+  },
+  {
+    "id": "rev-26",
+    "userId": "user-anonymous-26",
+    "name": "Scarlett Walker",
+    "rating": 5,
+    "text": "I've referred three friends already and they're all seeing results too. TradePilot is the real deal. Consistent profits and great support.",
+    "createdAt": "2025-09-20T09:45:00.000Z",
+    "adminReply": "Thanks for spreading the word, Scarlett! We love our community."
+  },
+  {
+    "id": "rev-27",
+    "userId": "user-anonymous-27",
+    "name": "Henry Hall",
+    "rating": 5,
+    "text": "Was looking for a way to diversify my income and TradePilot AI delivered. The setup was quick and I started seeing returns within days. Impressed!",
+    "createdAt": "2025-09-19T14:30:00.000Z",
+    "adminReply": ""
+  },
+  {
+    "id": "rev-28",
+    "userId": "user-anonymous-28",
+    "name": "Grace Young",
+    "rating": 5,
+    "text": "The arbitrage strategy is brilliant. I love that it's low risk compared to other crypto trading methods. Sleep well knowing my money is working smart.",
+    "createdAt": "2025-09-18T11:55:00.000Z",
+    "adminReply": "That's our goal - smart, safe, profitable trading!"
+  },
+  {
+    "id": "rev-29",
+    "userId": "user-anonymous-29",
+    "name": "Samuel King",
+    "rating": 4,
+    "text": "Very pleased with the service. The bot is efficient and profits are consistent. Customer support helped me understand everything when I was new.",
+    "createdAt": "2025-09-17T16:10:00.000Z",
+    "adminReply": ""
+  },
+  {
+    "id": "rev-30",
+    "userId": "user-anonymous-30",
+    "name": "Chloe Wright",
+    "rating": 5,
+    "text": "Finally found a platform I can trust. Everything is transparent, the team is responsive, and my account balance keeps climbing. What more could I ask for?",
+    "createdAt": "2025-09-16T13:25:00.000Z",
+    "adminReply": "That's music to our ears! Thanks, Chloe!"
+  },
+  {
+    "id": "rev-31",
+    "userId": "user-anonymous-31",
+    "name": "Matthew Lopez",
+    "rating": 5,
+    "text": "I'm a busy professional and don't have time for active trading. TradePilot AI is perfect because it works completely on autopilot. Love the passive income!",
+    "createdAt": "2025-09-15T10:40:00.000Z",
+    "adminReply": ""
+  },
+  {
+    "id": "rev-32",
+    "userId": "user-anonymous-32",
+    "name": "Lily Scott",
+    "rating": 5,
+    "text": "The platform exceeded my expectations. Clean interface, smart AI, and real profits. I check my dashboard every morning and it's always good news.",
+    "createdAt": "2025-09-14T15:05:00.000Z",
+    "adminReply": "We love being the good news in your morning, Lily!"
+  },
+  {
+    "id": "rev-33",
+    "userId": "user-anonymous-33",
+    "name": "Christopher Green",
+    "rating": 4,
+    "text": "Great results so far. The AI seems to know exactly when to buy and sell. My portfolio has grown more in two months than it did all last year.",
+    "createdAt": "2025-09-13T12:15:00.000Z",
+    "adminReply": ""
+  },
+  {
+    "id": "rev-34",
+    "userId": "user-anonymous-34",
+    "name": "Zoey Adams",
+    "rating": 5,
+    "text": "I was hesitant about crypto trading but TradePilot made it accessible and profitable. The AI does all the complicated stuff and I just enjoy the returns.",
+    "createdAt": "2025-09-12T09:30:00.000Z",
+    "adminReply": ""
+  },
+  {
+    "id": "rev-35",
+    "userId": "user-anonymous-35",
+    "name": "Ryan Baker",
+    "rating": 5,
+    "text": "Excellent platform! The arbitrage bot is incredibly efficient. I've made more profit here in three months than I made manually trading in a year.",
+    "createdAt": "2025-09-11T14:45:00.000Z",
+    "adminReply": "That's what we like to hear! Thanks for sharing your success, Ryan."
+  },
+  {
+    "id": "rev-36",
+    "userId": "user-anonymous-36",
+    "name": "Penelope Nelson",
+    "rating": 5,
+    "text": "Love everything about this service. From signup to profit, it's been smooth sailing. The support team is amazing too. Highly recommend!",
+    "createdAt": "2025-09-10T11:00:00.000Z",
+    "adminReply": ""
+  },
+  {
+    "id": "rev-37",
+    "userId": "user-anonymous-37",
+    "name": "Dylan Carter",
+    "rating": 4,
+    "text": "Really solid platform. The AI trading is smart and the returns are good. Would like to see more educational content but overall very happy.",
+    "createdAt": "2025-09-09T16:20:00.000Z",
+    "adminReply": "More educational content coming soon! Thanks Dylan."
+  },
+  {
+    "id": "rev-38",
+    "userId": "user-anonymous-38",
+    "name": "Victoria Mitchell",
+    "rating": 5,
+    "text": "This is hands down the best automated trading platform I've used. The profits are real, the withdrawals are fast, and the interface is beautiful.",
+    "createdAt": "2025-09-08T13:35:00.000Z",
+    "adminReply": ""
+  },
+  {
+    "id": "rev-39",
+    "userId": "user-anonymous-39",
+    "name": "Nathan Perez",
+    "rating": 5,
+    "text": "I started with the basic plan and upgraded after seeing how well it performed. The AI is incredibly smart at finding profitable trades. Worth every penny!",
+    "createdAt": "2025-09-07T10:50:00.000Z",
+    "adminReply": "Thanks for growing with us, Nathan!"
+  },
+  {
+    "id": "rev-40",
+    "userId": "user-anonymous-40",
+    "name": "Hannah Roberts",
+    "rating": 5,
+    "text": "My friends thought I was crazy to try automated trading, but now they're asking me how to join! The results speak for themselves.",
+    "createdAt": "2025-09-06T15:15:00.000Z",
+    "adminReply": ""
+  },
+  {
+    "id": "rev-41",
+    "userId": "user-anonymous-41",
+    "name": "Isaac Turner",
+    "rating": 4,
+    "text": "Very pleased with TradePilot. The bot is efficient and reliable. Profits have been steady since day one. Looking forward to long-term success!",
+    "createdAt": "2025-09-05T12:30:00.000Z",
+    "adminReply": ""
+  },
+  {
+    "id": "rev-42",
+    "userId": "user-anonymous-42",
+    "name": "Addison Phillips",
+    "rating": 5,
+    "text": "Best passive income stream I have. The AI works around the clock finding opportunities. I literally wake up to profits every day. Amazing!",
+    "createdAt": "2025-09-04T09:45:00.000Z",
+    "adminReply": "We love helping you wake up to good news! Keep it up, Addison!"
+  },
+  {
+    "id": "rev-43",
+    "userId": "user-anonymous-43",
+    "name": "Caleb Campbell",
+    "rating": 5,
+    "text": "Tried a few crypto bots before this and they were all disappointing. TradePilot AI is different - it actually works and makes real money.",
+    "createdAt": "2025-09-03T14:00:00.000Z",
+    "adminReply": ""
+  },
+  {
+    "id": "rev-44",
+    "userId": "user-anonymous-44",
+    "name": "Nora Parker",
+    "rating": 5,
+    "text": "The platform is user-friendly and the AI is powerful. I don't need to be a crypto expert to make money here. That's what I love about it!",
+    "createdAt": "2025-09-02T11:15:00.000Z",
+    "adminReply": ""
+  },
+  {
+    "id": "rev-45",
+    "userId": "user-anonymous-45",
+    "name": "Elijah Evans",
+    "rating": 4,
+    "text": "Great experience overall. The arbitrage trading is clever and profitable. Support team is helpful and quick to respond. Very satisfied!",
+    "createdAt": "2025-09-01T16:30:00.000Z",
+    "adminReply": "Thanks Elijah! We're here whenever you need us."
+  },
+  {
+    "id": "rev-46",
+    "userId": "user-anonymous-46",
+    "name": "Layla Edwards",
+    "rating": 5,
+    "text": "I've been earning consistently for months now. The AI never sleeps and finds trades even when markets are slow. Impressive technology!",
+    "createdAt": "2025-08-31T13:45:00.000Z",
+    "adminReply": ""
+  },
+  {
+    "id": "rev-47",
+    "userId": "user-anonymous-47",
+    "name": "Gabriel Collins",
+    "rating": 5,
+    "text": "TradePilot AI has changed my financial situation. The passive income is real and growing. I can't thank the team enough for this opportunity.",
+    "createdAt": "2025-08-30T10:00:00.000Z",
+    "adminReply": "That's what we're all about! Congrats on your success, Gabriel!"
+  },
+  {
+    "id": "rev-48",
+    "userId": "user-anonymous-48",
+    "name": "Avery Stewart",
+    "rating": 5,
+    "text": "Simple, effective, and profitable. Those three words sum up my experience with TradePilot AI. Couldn't ask for anything more!",
+    "createdAt": "2025-08-29T15:20:00.000Z",
+    "adminReply": ""
+  },
+  {
+    "id": "rev-49",
+    "userId": "user-anonymous-49",
+    "name": "Julian Sanchez",
+    "rating": 4,
+    "text": "Really happy with the service. The bot is smart and makes good trading decisions. My balance grows every week without me doing anything.",
+    "createdAt": "2025-08-28T12:35:00.000Z",
+    "adminReply": ""
+  },
+  {
+    "id": "rev-50",
+    "userId": "user-anonymous-50",
+    "name": "Eleanor Morris",
+    "rating": 5,
+    "text": "This platform delivers on its promises. Real profits, transparent operations, and excellent support. I tell everyone about TradePilot AI!",
+    "createdAt": "2025-08-27T09:50:00.000Z",
+    "adminReply": "Thanks for being an amazing advocate, Eleanor!"
+  }
+]
