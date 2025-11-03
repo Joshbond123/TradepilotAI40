@@ -37,14 +37,22 @@ const WelcomeMessageEditor: React.FC = () => {
                 setErrorMessage('');
                 setSaveStatus('Saving template to server...');
                 
+                const savedTemplate = { ...template };
+                
+                const currentTemplate = await getWelcomeInboxMessageTemplate();
+                if (currentTemplate.videoEmbedHtml) {
+                    savedTemplate.videoEmbedHtml = currentTemplate.videoEmbedHtml;
+                }
+                
                 console.log('Saving template...', { 
-                    hasImage: !!template.imageUrl, 
-                    hasVideo: !!template.videoUrl,
-                    imageSize: template.imageUrl?.length || 0,
-                    videoSize: template.videoUrl?.length || 0
+                    hasImage: !!savedTemplate.imageUrl, 
+                    hasVideo: !!savedTemplate.videoUrl,
+                    hasPermanentEmbed: !!savedTemplate.videoEmbedHtml,
+                    imageSize: savedTemplate.imageUrl?.length || 0,
+                    videoSize: savedTemplate.videoUrl?.length || 0
                 });
                 
-                await saveWelcomeInboxMessageTemplate(template);
+                await saveWelcomeInboxMessageTemplate(savedTemplate);
                 
                 console.log('Template saved successfully');
                 setSaveStatus('✅ Template saved successfully! Changes are permanent.');
@@ -87,6 +95,13 @@ const WelcomeMessageEditor: React.FC = () => {
         if (!template) {
             console.error('Template not loaded');
             setErrorMessage('Template not loaded. Please refresh the page.');
+            return;
+        }
+        
+        if (template.videoEmbedHtml) {
+            setErrorMessage(`Cannot upload ${type} - a permanent video is already embedded. Only title and text can be edited.`);
+            setTimeout(() => setErrorMessage(''), 5000);
+            e.target.value = '';
             return;
         }
         
