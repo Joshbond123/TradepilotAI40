@@ -1,4 +1,3 @@
-```javascript
 import express from 'express';
 import cors from 'cors';
 import nodemailer from 'nodemailer';
@@ -478,4 +477,3 @@ ensureStorageExists().then(() => {
   console.error('Failed to initialize storage:', error);
   process.exit(1);
 });
-```
