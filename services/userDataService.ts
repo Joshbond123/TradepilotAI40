@@ -417,7 +417,7 @@ const DEFAULT_WALLET_CONFIG: WalletConfig = {
 export const getWalletConfig = async (): Promise<WalletConfig> => {
     try {
         const settings = await apiCall('/settings');
-        return settings.walletConfig || DEFAULT_WALLET_CONFIG;
+        return (settings.walletConfig && Object.keys(settings.walletConfig).length > 0) ? settings.walletConfig : DEFAULT_WALLET_CONFIG;
     } catch (error) {
         console.error("Failed to get wallet config:", error);
         return DEFAULT_WALLET_CONFIG;
