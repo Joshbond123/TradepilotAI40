@@ -176,14 +176,25 @@ const WelcomeMessageEditor: React.FC = () => {
                         <label className="text-sm text-brand-text-secondary">Message Body</label>
                         <textarea name="text" value={template.text} onChange={handleInputChange} rows={8} className="w-full mt-1 p-2 bg-brand-bg rounded border border-white/20"/>
                     </div>
-                     <div>
-                        <label className="text-sm text-brand-text-secondary">Image (optional)</label>
-                        <input type="file" accept="image/*" onChange={e => handleFileChange(e, 'image')} className="w-full mt-1 p-1 file:mr-4 file:py-1 file:px-2 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-brand-primary/20 file:text-brand-primary hover:file:bg-brand-primary/40 text-sm text-brand-text-secondary bg-brand-bg rounded border border-white/20"/>
-                    </div>
-                     <div>
-                        <label className="text-sm text-brand-text-secondary">Video (optional)</label>
-                        <input type="file" accept="video/*" onChange={e => handleFileChange(e, 'video')} className="w-full mt-1 p-1 file:mr-4 file:py-1 file:px-2 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-brand-primary/20 file:text-brand-primary hover:file:bg-brand-primary/40 text-sm text-brand-text-secondary bg-brand-bg rounded border border-white/20"/>
-                    </div>
+                     {template.videoEmbedHtml && (
+                        <div className="p-3 bg-blue-500/10 border border-blue-500/30 rounded">
+                            <p className="text-sm text-blue-400 mb-2">
+                                ℹ️ <strong>Permanent Video</strong>: The welcome video is embedded and cannot be changed. Only the title and text are editable.
+                            </p>
+                        </div>
+                    )}
+                    {!template.videoEmbedHtml && (
+                        <>
+                            <div>
+                                <label className="text-sm text-brand-text-secondary">Image (optional)</label>
+                                <input type="file" accept="image/*" onChange={e => handleFileChange(e, 'image')} className="w-full mt-1 p-1 file:mr-4 file:py-1 file:px-2 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-brand-primary/20 file:text-brand-primary hover:file:bg-brand-primary/40 text-sm text-brand-text-secondary bg-brand-bg rounded border border-white/20"/>
+                            </div>
+                            <div>
+                                <label className="text-sm text-brand-text-secondary">Video (optional)</label>
+                                <input type="file" accept="video/*" onChange={e => handleFileChange(e, 'video')} className="w-full mt-1 p-1 file:mr-4 file:py-1 file:px-2 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-brand-primary/20 file:text-brand-primary hover:file:bg-brand-primary/40 text-sm text-brand-text-secondary bg-brand-bg rounded border border-white/20"/>
+                            </div>
+                        </>
+                    )}
                 </Card>
 
                 {/* Preview */}
@@ -197,7 +208,10 @@ const WelcomeMessageEditor: React.FC = () => {
                                 <button onClick={() => removeMedia('image')} className="absolute -top-2 -right-2 p-1 bg-red-500 rounded-full text-white"><Trash2 size={12}/></button>
                             </div>
                         )}
-                        {template.videoUrl && (
+                        {template.videoEmbedHtml && (
+                            <div className="my-4 rounded-lg overflow-hidden max-w-md" dangerouslySetInnerHTML={{ __html: template.videoEmbedHtml }} />
+                        )}
+                        {!template.videoEmbedHtml && template.videoUrl && (
                             <div className="relative inline-block my-4">
                                 <video src={template.videoUrl} controls className="rounded-lg w-full max-w-xs"/>
                                 <button onClick={() => removeMedia('video')} className="absolute -top-2 -right-2 p-1 bg-red-500 rounded-full text-white"><Trash2 size={12}/></button>

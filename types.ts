@@ -137,6 +137,7 @@ export interface Message {
   text: string;
   imageUrl?: string; // base64 encoded
   videoUrl?: string; // base64 encoded
+  videoEmbedHtml?: string; // Permanent embedded video HTML
   createdAt: string;
   recipientId?: string; // If undefined, it's a broadcast message
 }
@@ -153,6 +154,7 @@ export interface WelcomeInboxMessageTemplate {
   text: string;
   imageUrl?: string;
   videoUrl?: string;
+  videoEmbedHtml?: string; // Permanent embedded video HTML
 }
 
 export interface Testimonial {

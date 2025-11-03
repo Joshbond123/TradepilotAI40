@@ -25,6 +25,9 @@ const STORAGE_DIR = path.join(__dirname, 'storage');
 const USERS_FILE = path.join(STORAGE_DIR, 'users.json');
 const SETTINGS_FILE = path.join(STORAGE_DIR, 'settings.json');
 const MESSAGES_FILE = path.join(STORAGE_DIR, 'messages.json');
+const REVIEWS_FILE = path.join(STORAGE_DIR, 'reviews.json');
+const PROFITS_FILE = path.join(STORAGE_DIR, 'profits.json');
+const ACTIVITY_LOG_FILE = path.join(STORAGE_DIR, 'activity.log');
 
 const ensureStorageExists = async () => {
   try {
@@ -159,6 +162,62 @@ app.post('/api/storage/messages', async (req, res) => {
     res.json({ success: true, data: req.body });
   } catch (error) {
     console.error('Error saving messages:', error);
+    res.status(500).json({ success: false, message: error.message });
+  }
+});
+
+app.get('/api/storage/reviews', async (req, res) => {
+  try {
+    const reviews = await readJSONFile(REVIEWS_FILE, []);
+    res.json({ success: true, data: reviews });
+  } catch (error) {
+    console.error('Error reading reviews:', error);
+    res.status(500).json({ success: false, message: error.message });
+  }
+});
+
+app.post('/api/storage/reviews', async (req, res) => {
+  try {
+    await writeJSONFile(REVIEWS_FILE, req.body);
+    res.json({ success: true, data: req.body });
+  } catch (error) {
+    console.error('Error saving reviews:', error);
+    res.status(500).json({ success: false, message: error.message });
+  }
+});
+
+app.get('/api/storage/profits', async (req, res) => {
+  try {
+    const profits = await readJSONFile(PROFITS_FILE, []);
+    res.json({ success: true, data: profits });
+  } catch (error) {
+    console.error('Error reading profits:', error);
+    res.status(500).json({ success: false, message: error.message });
+  }
+});
+
+app.post('/api/storage/profits', async (req, res) => {
+  try {
+    await writeJSONFile(PROFITS_FILE, req.body);
+    res.json({ success: true, data: req.body });
+  } catch (error) {
+    console.error('Error saving profits:', error);
+    res.status(500).json({ success: false, message: error.message });
+  }
+});
+
+app.post('/api/storage/activity-log', async (req, res) => {
+  try {
+    const logs = await readJSONFile(ACTIVITY_LOG_FILE, []);
+    const newLog = {
+      timestamp: new Date().toISOString(),
+      ...req.body
+    };
+    logs.push(newLog);
+    await writeJSONFile(ACTIVITY_LOG_FILE, logs);
+    res.json({ success: true, data: newLog });
+  } catch (error) {
+    console.error('Error adding activity log:', error);
     res.status(500).json({ success: false, message: error.message });
   }
 });

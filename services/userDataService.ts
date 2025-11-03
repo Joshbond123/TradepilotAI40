@@ -706,13 +706,13 @@ const seedTestimonials = async () => {
 
 export const getTestimonials = async (): Promise<Testimonial[]> => {
     try {
-        const settings = await apiCall('/settings');
-        if (settings.testimonials && settings.testimonials.length > 0) {
-            return settings.testimonials.sort((a: Testimonial, b: Testimonial) => 
+        const reviews = await apiCall('/reviews');
+        if (reviews && reviews.length > 0) {
+            return reviews.sort((a: Testimonial, b: Testimonial) => 
                 new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
             );
         }
-        return await seedTestimonials();
+        return [];
     } catch (error) {
         console.error("Failed to get testimonials:", error);
         return [];
@@ -721,9 +721,7 @@ export const getTestimonials = async (): Promise<Testimonial[]> => {
 
 export const saveTestimonials = async (testimonials: Testimonial[]): Promise<void> => {
     try {
-        const settings = await apiCall('/settings');
-        settings.testimonials = testimonials;
-        await apiCall('/settings', 'POST', settings);
+        await apiCall('/reviews', 'POST', testimonials);
     } catch (error) {
         console.error("Failed to save testimonials:", error);
         throw error;

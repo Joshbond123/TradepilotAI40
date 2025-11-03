@@ -49,7 +49,8 @@ const InboxPage: React.FC<InboxPageProps> = ({ user }) => {
                             <InteractiveCard className="p-6">
                                 <h3 className="text-xl font-bold text-white mb-2">{msg.title}</h3>
                                 {msg.imageUrl && <img src={msg.imageUrl} alt="Message visual" className="my-4 rounded-lg max-h-64 w-auto" />}
-                                {msg.videoUrl && <video src={msg.videoUrl} controls className="my-4 rounded-lg w-full max-w-sm" />}
+                                {msg.videoEmbedHtml && <div className="my-4 rounded-lg overflow-hidden" dangerouslySetInnerHTML={{ __html: msg.videoEmbedHtml }} />}
+                                {!msg.videoEmbedHtml && msg.videoUrl && <video src={msg.videoUrl} controls className="my-4 rounded-lg w-full max-w-sm" />}
                                 <p className="text-brand-text-secondary whitespace-pre-wrap">{msg.text}</p>
                                 <p className="text-xs text-brand-text-secondary/60 mt-4 text-right">
                                     {new Date(msg.createdAt).toLocaleString()}
