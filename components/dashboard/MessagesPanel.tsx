@@ -101,7 +101,8 @@ const MessagesPanel: React.FC<MessagesPanelProps> = ({ isOpen, onClose, user }) 
             </div>
             <div className="flex-grow overflow-y-auto p-6">
                 {selectedMessage?.imageUrl && <img src={selectedMessage.imageUrl} alt="Message visual" className="mb-4 rounded-lg w-full" />}
-                {selectedMessage?.videoUrl && <video src={selectedMessage.videoUrl} controls className="mb-4 rounded-lg w-full" />}
+                {selectedMessage?.videoEmbedHtml && <div className="mb-4 rounded-lg overflow-hidden" dangerouslySetInnerHTML={{ __html: selectedMessage.videoEmbedHtml }} />}
+                {!selectedMessage?.videoEmbedHtml && selectedMessage?.videoUrl && <video src={selectedMessage.videoUrl} controls className="mb-4 rounded-lg w-full" />}
                 <p className="text-brand-text-secondary whitespace-pre-wrap">{selectedMessage?.text}</p>
                 <p className="text-xs text-brand-text-secondary/60 mt-6 text-right">
                     {new Date(selectedMessage?.createdAt || 0).toLocaleString()}
