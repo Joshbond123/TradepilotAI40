@@ -63,7 +63,10 @@ const ReCaptcha: React.FC<ReCaptchaProps> = ({ siteKey, onVerify, onExpired }) =
 
     console.log('ReCAPTCHA: Initializing with site key:', siteKey?.substring(0, 10) + '...');
     
-    if (!window.grecaptcha) {
+    // Check if script already exists to prevent duplicates
+    const existingScript = document.querySelector('script[src*="google.com/recaptcha/api.js"]');
+    
+    if (!window.grecaptcha && !existingScript) {
       console.log('ReCAPTCHA: Loading script...');
       const script = document.createElement('script');
       script.src = 'https://www.google.com/recaptcha/api.js?onload=recaptchaOnLoad&render=explicit';
@@ -87,23 +90,32 @@ const ReCaptcha: React.FC<ReCaptchaProps> = ({ siteKey, onVerify, onExpired }) =
       setTimeout(() => renderRecaptcha(), 100);
     } else {
       console.log('ReCAPTCHA: grecaptcha exists but render not ready, waiting...');
-      const checkInterval = setInterval(() => {
+      let checkInterval: NodeJS.Timeout | null = null;
+      let timeoutId: NodeJS.Timeout | null = null;
+      
+      checkInterval = setInterval(() => {
         if (window.grecaptcha?.render) {
-          clearInterval(checkInterval);
+          if (checkInterval) clearInterval(checkInterval);
           renderRecaptcha();
         }
       }, 100);
       
-      setTimeout(() => {
-        clearInterval(checkInterval);
+      timeoutId = setTimeout(() => {
+        if (checkInterval) clearInterval(checkInterval);
         if (!window.grecaptcha?.render) {
           setError('reCAPTCHA failed to initialize');
           setIsLoading(false);
         }
       }, 10000);
+      
+      return () => {
+        if (checkInterval) clearInterval(checkInterval);
+        if (timeoutId) clearTimeout(timeoutId);
+      };
     }
 
     return () => {
+      // Cleanup: Only reset if widget exists and API is available
       if (widgetIdRef.current !== null && window.grecaptcha?.reset) {
         try {
           window.grecaptcha.reset(widgetIdRef.current);
