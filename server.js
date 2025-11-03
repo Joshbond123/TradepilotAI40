@@ -1,3 +1,4 @@
+```javascript
 import express from 'express';
 import cors from 'cors';
 import nodemailer from 'nodemailer';
@@ -57,6 +58,9 @@ const readJSONFile = async (filePath, defaultValue = []) => {
 const writeJSONFile = async (filePath, data) => {
   await fs.writeFile(filePath, JSON.stringify(data), 'utf-8');
 };
+
+// Serve static files from dist directory
+app.use(express.static(path.join(__dirname, 'dist')));
 
 app.get('/api/storage/users', async (req, res) => {
   try {
@@ -459,6 +463,11 @@ app.get('/api/health', (req, res) => {
   });
 });
 
+// Catch-all route to serve index.html for client-side routing
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+});
+
 ensureStorageExists().then(() => {
   app.listen(PORT, '0.0.0.0', () => {
     console.log(`🚀 Backend server running on port ${PORT}`);
@@ -469,3 +478,4 @@ ensureStorageExists().then(() => {
   console.error('Failed to initialize storage:', error);
   process.exit(1);
 });
+```
