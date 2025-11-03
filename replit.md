@@ -43,7 +43,10 @@ TradePilot AI is an advanced AI-powered crypto arbitrage trading platform with a
 ├── storage/             # File-based data storage
 │   ├── users.json       # User accounts and data
 │   ├── settings.json    # System settings and configurations
-│   └── messages.json    # Inbox messages
+│   ├── messages.json    # Inbox messages
+│   ├── reviews.json     # User reviews and testimonials (50 unique reviews)
+│   ├── profits.json     # User profit records
+│   └── activity.log     # Admin activity logging
 ├── server.js            # Express backend server
 ├── App.tsx              # Main application component
 ├── index.tsx            # Application entry point
@@ -62,6 +65,8 @@ TradePilot AI is an advanced AI-powered crypto arbitrage trading platform with a
 - AI-powered chatbot
 - 3D visualizations and animations
 - Responsive mobile design
+- Reviews/Testimonials page with pagination (7 reviews per page, 50 total unique reviews)
+- Permanent welcome video embedded in inbox messages (admin can only edit text)
 
 ## Running the Application
 
@@ -96,8 +101,11 @@ npm run preview
 ## Data Storage
 All user data, settings, and configurations are stored in JSON files in the `storage/` directory for permanent persistence:
 - **users.json**: User accounts, authentication, transactions, balances, referrals, sessions, and login history
-- **settings.json**: System settings, wallet configurations, welcome page templates (URL references only), chatbot settings, and testimonials
+- **settings.json**: System settings, wallet configurations, welcome page templates, chatbot settings (no longer stores testimonials)
 - **messages.json**: Inbox messages and notifications
+- **reviews.json**: 50 unique, human-sounding user reviews and testimonials with pagination support
+- **profits.json**: User profit records and tracking
+- **activity.log**: System activity and admin action logging
 - **storage/media/**: Video and image files for welcome page and inbox templates (stored separately from JSON)
 
 The backend automatically creates the storage directory and initializes files on first startup.
@@ -121,6 +129,15 @@ The application is configured for autoscale deployment on Replit:
 - Port: 5000 (frontend), 3000 (backend API)
 
 ## Recent Changes
+- **2025-11-03**: Reviews system and permanent welcome video implementation
+  - **NEW FILE STORAGE**: Added reviews.json (50 unique reviews), profits.json, and activity.log to storage system
+  - **REVIEWS PAGINATION**: Testimonials page displays 7 reviews per page with Next/Previous navigation
+  - Created 50 unique, human-sounding reviews (no repetition, diverse feedback)
+  - **PERMANENT WELCOME VIDEO**: Embedded Streamable video permanently in welcome inbox messages
+  - Admin can edit inbox message title and text, but video embed is locked and permanent
+  - Updated backend with new API endpoints: /api/storage/reviews, /api/storage/profits, /api/storage/activity-log
+  - Reviews now stored separately from settings.json for better organization
+  - All data persists permanently to file storage with no external database required
 - **2025-11-02**: Registration fix and API routing configuration
   - **ROOT CAUSE IDENTIFIED**: Fixed hardcoded localhost:3000 API URLs that prevented registration from working in production
   - **SOLUTION**: Configured Vite proxy to route all /api/* requests to backend server
