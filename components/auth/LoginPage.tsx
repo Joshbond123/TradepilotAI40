@@ -41,11 +41,10 @@ const LoginPage: React.FC<LoginPageProps> = ({ onNavigate, onLoginSuccess, setti
       const user = await findUserByEmailOrName(identifier);
       if (user && user.password === password) {
         await logLogin(user.id);
-        setTimeout(() => {
-          // Exclude password from the user object that gets stored in the session
-          const { password: _, ...userToLog } = user;
-          onLoginSuccess(userToLog);
-        }, 1000); // Simulate network latency
+        // Exclude password from the user object that gets stored in the session
+        const { password: _, ...userToLog } = user;
+        onLoginSuccess(userToLog);
+        setIsLoading(false);
       } else {
         setTimeout(() => {
           setError('Incorrect email/username or password. Please try again.');

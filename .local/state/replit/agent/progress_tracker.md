@@ -3,3 +3,4 @@
 [x] 3. Verify the project is working using the feedback tool
 [x] 4. Inform user the import is completed and they can start building, mark the import as completed using the complete_project_import tool
 [x] 5. Fixed Deposit & Withdrawal pages by correcting getWalletConfig function to handle empty wallet configurations
+[x] 6. Fixed login page bug - removed delay and properly reset loading state after successful login
