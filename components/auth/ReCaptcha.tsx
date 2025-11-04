@@ -25,8 +25,10 @@ const ReCaptcha: React.FC<ReCaptchaProps> = ({ siteKey, onVerify, onExpired }) =
       return;
     }
 
-    if (containerRef.current) {
-      containerRef.current.innerHTML = '';
+    // Skip if already rendered
+    if (widgetIdRef.current !== null) {
+      console.log('ReCAPTCHA: Already rendered, skipping');
+      return;
     }
 
     try {
@@ -46,8 +48,8 @@ const ReCaptcha: React.FC<ReCaptchaProps> = ({ siteKey, onVerify, onExpired }) =
         },
         'error-callback': () => {
           console.error('ReCAPTCHA: Error callback triggered - Domain not authorized or network issue');
-          setError('reCAPTCHA error: This domain may not be authorized for these keys. Please check your Google reCAPTCHA admin console.');
-          setIsLoading(false);
+          // Don't set error state here as it causes the widget to disappear
+          // Just log it for debugging
         },
         theme: 'dark',
       });
@@ -57,8 +59,15 @@ const ReCaptcha: React.FC<ReCaptchaProps> = ({ siteKey, onVerify, onExpired }) =
     } catch (error) {
       console.error('ReCAPTCHA: Render error:', error);
       const errorMessage = error instanceof Error ? error.message : 'Unknown error';
-      setError(`reCAPTCHA failed to load: ${errorMessage}. Check console for details.`);
-      setIsLoading(false);
+      
+      // Only show critical errors that prevent initial loading
+      if (errorMessage.includes('reCAPTCHA has already been rendered')) {
+        console.log('ReCAPTCHA: Already rendered, this is safe to ignore');
+        setIsLoading(false);
+      } else {
+        setError(`Failed to initialize reCAPTCHA. Please check your site key configuration.`);
+        setIsLoading(false);
+      }
     }
   }, [siteKey, onVerify, onExpired]);
 
@@ -133,6 +142,7 @@ const ReCaptcha: React.FC<ReCaptchaProps> = ({ siteKey, onVerify, onExpired }) =
         } catch (e) {
           console.log('ReCAPTCHA: Cleanup error (safe to ignore)');
         }
+        widgetIdRef.current = null;
       }
     };
   }, [siteKey, renderRecaptcha]);
@@ -146,7 +156,7 @@ const ReCaptcha: React.FC<ReCaptchaProps> = ({ siteKey, onVerify, onExpired }) =
         </div>
       )}
       {error && (
-        <div className="text-red-400 text-sm bg-red-900/20 border border-red-500/30 px-4 py-3 rounded-lg space-y-2 max-w-md">
+        <div className="text-red-400 text-sm bg-red-900/20 border border-red-500/30 px-4 py-3 rounded-lg space-y-2 max-w-md mb-4">
           <div className="font-semibold">⚠️ reCAPTCHA Error</div>
           <div>{error}</div>
           {error.includes('domain') && (
@@ -157,7 +167,7 @@ const ReCaptcha: React.FC<ReCaptchaProps> = ({ siteKey, onVerify, onExpired }) =
           )}
         </div>
       )}
-      <div ref={containerRef} className={error ? 'hidden' : ''}></div>
+      <div ref={containerRef}></div>
     </div>
   );
 };
