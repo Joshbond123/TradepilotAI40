@@ -63,9 +63,8 @@ const App: React.FC = () => {
     console.log('Login success, user:', loggedInUser.name);
     setUser(loggedInUser);
     localStorage.setItem('tradePilotUser', JSON.stringify(loggedInUser));
-    const targetView = loggedInUser.hasSeenWelcome ? 'dashboard' : 'welcome';
-    console.log('Setting view to:', targetView);
-    setView(targetView);
+    // Refresh the page to ensure clean state before showing dashboard
+    window.location.reload();
   }, []);
 
   const handleRegisterSuccess = useCallback((registeredUser: User) => {
