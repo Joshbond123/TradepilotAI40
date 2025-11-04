@@ -18,6 +18,7 @@ const ReCaptcha: React.FC<ReCaptchaProps> = ({ siteKey, onVerify, onExpired }) =
   const widgetIdRef = useRef<number | null>(null);
   const [isLoading, setIsLoading] = React.useState(true);
   const [error, setError] = React.useState<string | null>(null);
+  const [resetTrigger, setResetTrigger] = React.useState(0);
 
   const renderRecaptcha = useCallback(() => {
     if (!containerRef.current || !window.grecaptcha || !window.grecaptcha.render) {
@@ -41,10 +42,21 @@ const ReCaptcha: React.FC<ReCaptchaProps> = ({ siteKey, onVerify, onExpired }) =
           console.log('ReCAPTCHA: Verification successful');
           setError(null);
           onVerify(token);
+          // Reset trigger to allow re-verification on next attempt
+          setResetTrigger(prev => prev + 1);
         },
         'expired-callback': () => {
           console.log('ReCAPTCHA: Token expired');
           if (onExpired) onExpired();
+          // Auto-reset the widget when expired
+          if (widgetIdRef.current !== null && window.grecaptcha?.reset) {
+            try {
+              window.grecaptcha.reset(widgetIdRef.current);
+              console.log('ReCAPTCHA: Widget auto-reset after expiration');
+            } catch (e) {
+              console.error('ReCAPTCHA: Failed to reset after expiration', e);
+            }
+          }
         },
         'error-callback': () => {
           console.error('ReCAPTCHA: Error callback triggered - Domain not authorized or network issue');

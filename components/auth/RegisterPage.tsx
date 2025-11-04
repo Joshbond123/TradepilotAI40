@@ -22,6 +22,7 @@ const RegisterPage: React.FC<RegisterPageProps> = ({ onNavigate, onRegisterSucce
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [recaptchaToken, setRecaptchaToken] = useState<string>('');
+  const [recaptchaKey, setRecaptchaKey] = useState(0);
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -59,6 +60,8 @@ const RegisterPage: React.FC<RegisterPageProps> = ({ onNavigate, onRegisterSucce
       const existingUser = await findUserByEmailOrName(email);
       if (existingUser) {
           setError('An account with this email already exists.');
+          setRecaptchaToken(''); // Reset reCAPTCHA token on failure
+          setRecaptchaKey(prev => prev + 1); // Force reCAPTCHA to remount and reset
           setIsLoading(false);
           return;
       }
@@ -81,6 +84,8 @@ const RegisterPage: React.FC<RegisterPageProps> = ({ onNavigate, onRegisterSucce
     } catch (error) {
       console.error('Registration failed:', error);
       setError('Registration failed. Please try again.');
+      setRecaptchaToken(''); // Reset reCAPTCHA token on error
+      setRecaptchaKey(prev => prev + 1); // Force reCAPTCHA to remount and reset
       setIsLoading(false);
     }
   };
@@ -111,6 +116,7 @@ const RegisterPage: React.FC<RegisterPageProps> = ({ onNavigate, onRegisterSucce
           
           {settings?.recaptchaEnabled && settings.recaptchaSiteKey && (
             <ReCaptcha
+              key={recaptchaKey}
               siteKey={settings.recaptchaSiteKey}
               onVerify={setRecaptchaToken}
               onExpired={() => setRecaptchaToken('')}

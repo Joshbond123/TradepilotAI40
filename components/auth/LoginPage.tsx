@@ -19,6 +19,7 @@ const LoginPage: React.FC<LoginPageProps> = ({ onNavigate, onLoginSuccess, setti
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [recaptchaToken, setRecaptchaToken] = useState<string>('');
+  const [recaptchaKey, setRecaptchaKey] = useState(0);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -48,12 +49,16 @@ const LoginPage: React.FC<LoginPageProps> = ({ onNavigate, onLoginSuccess, setti
       } else {
         setTimeout(() => {
           setError('Incorrect email/username or password. Please try again.');
+          setRecaptchaToken(''); // Reset reCAPTCHA token on failure
+          setRecaptchaKey(prev => prev + 1); // Force reCAPTCHA to remount and reset
           setIsLoading(false);
         }, 1000);
       }
     } catch (e) {
       setTimeout(() => {
         setError('An unexpected error occurred. Please try again.');
+        setRecaptchaToken(''); // Reset reCAPTCHA token on error
+        setRecaptchaKey(prev => prev + 1); // Force reCAPTCHA to remount and reset
         setIsLoading(false);
       }, 1000);
     }
@@ -104,6 +109,7 @@ const LoginPage: React.FC<LoginPageProps> = ({ onNavigate, onLoginSuccess, setti
           
           {settings?.recaptchaEnabled && settings.recaptchaSiteKey && (
             <ReCaptcha
+              key={recaptchaKey}
               siteKey={settings.recaptchaSiteKey}
               onVerify={setRecaptchaToken}
               onExpired={() => setRecaptchaToken('')}
