@@ -60,13 +60,12 @@ const App: React.FC = () => {
   }, []);
 
   const handleLoginSuccess = useCallback((loggedInUser: User) => {
+    console.log('Login success, user:', loggedInUser.name);
     setUser(loggedInUser);
     localStorage.setItem('tradePilotUser', JSON.stringify(loggedInUser));
-    if (loggedInUser.hasSeenWelcome) {
-        setView('dashboard');
-    } else {
-        setView('welcome');
-    }
+    const targetView = loggedInUser.hasSeenWelcome ? 'dashboard' : 'welcome';
+    console.log('Setting view to:', targetView);
+    setView(targetView);
   }, []);
 
   const handleRegisterSuccess = useCallback((registeredUser: User) => {
@@ -140,7 +139,21 @@ const App: React.FC = () => {
     </div>
   );
 
+  // Redirect logged-in users away from auth pages
+  useEffect(() => {
+    if (user && (view === 'login' || view === 'register' || view === 'homepage' || view === 'forgot')) {
+      console.log('User is logged in, redirecting from', view, 'to appropriate view');
+      if (user.hasSeenWelcome) {
+        setView('dashboard');
+      } else {
+        setView('welcome');
+      }
+    }
+  }, [user, view]);
+
   const renderView = () => {
+    console.log('Rendering view:', view, 'User:', user?.name || 'None');
+    
     switch(view) {
       case 'homepage':
         return <HomePage key="homepage" onNavigate={setView} onLogoClick={handleLogoClick} />;
