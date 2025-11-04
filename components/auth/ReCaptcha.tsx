@@ -31,15 +31,23 @@ const ReCaptcha: React.FC<ReCaptchaProps> = ({ siteKey, onVerify, onExpired }) =
 
     try {
       console.log('ReCAPTCHA: Rendering widget with siteKey:', siteKey?.substring(0, 10) + '...');
+      console.log('ReCAPTCHA: Current domain:', window.location.hostname);
+      
       widgetIdRef.current = window.grecaptcha.render(containerRef.current, {
         sitekey: siteKey,
         callback: (token: string) => {
           console.log('ReCAPTCHA: Verification successful');
+          setError(null);
           onVerify(token);
         },
         'expired-callback': () => {
           console.log('ReCAPTCHA: Token expired');
           if (onExpired) onExpired();
+        },
+        'error-callback': () => {
+          console.error('ReCAPTCHA: Error callback triggered - Domain not authorized or network issue');
+          setError('reCAPTCHA error: This domain may not be authorized for these keys. Please check your Google reCAPTCHA admin console.');
+          setIsLoading(false);
         },
         theme: 'dark',
       });
@@ -48,7 +56,8 @@ const ReCaptcha: React.FC<ReCaptchaProps> = ({ siteKey, onVerify, onExpired }) =
       console.log('ReCAPTCHA: Widget rendered successfully, ID:', widgetIdRef.current);
     } catch (error) {
       console.error('ReCAPTCHA: Render error:', error);
-      setError('Failed to load reCAPTCHA. Please refresh the page.');
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+      setError(`reCAPTCHA failed to load: ${errorMessage}. Check console for details.`);
       setIsLoading(false);
     }
   }, [siteKey, onVerify, onExpired]);
@@ -74,13 +83,13 @@ const ReCaptcha: React.FC<ReCaptchaProps> = ({ siteKey, onVerify, onExpired }) =
       script.defer = true;
       
       window.recaptchaOnLoad = () => {
-        console.log('ReCAPTCHA: Script loaded, rendering widget...');
+        console.log('ReCAPTCHA: Script loaded successfully, rendering widget...');
         setTimeout(() => renderRecaptcha(), 100);
       };
       
-      script.onerror = () => {
-        console.error('ReCAPTCHA: Failed to load script');
-        setError('Failed to load reCAPTCHA script');
+      script.onerror = (e) => {
+        console.error('ReCAPTCHA: Failed to load script from Google. Network error or blocked by browser.', e);
+        setError('Unable to load reCAPTCHA from Google servers. Check your internet connection or browser settings.');
         setIsLoading(false);
       };
       
@@ -103,7 +112,8 @@ const ReCaptcha: React.FC<ReCaptchaProps> = ({ siteKey, onVerify, onExpired }) =
       timeoutId = setTimeout(() => {
         if (checkInterval) clearInterval(checkInterval);
         if (!window.grecaptcha?.render) {
-          setError('reCAPTCHA failed to initialize');
+          console.error('ReCAPTCHA: Timeout - grecaptcha.render not available after 10 seconds');
+          setError('reCAPTCHA took too long to load. Please refresh the page and try again.');
           setIsLoading(false);
         }
       }, 10000);
@@ -130,13 +140,21 @@ const ReCaptcha: React.FC<ReCaptchaProps> = ({ siteKey, onVerify, onExpired }) =
   return (
     <div className="flex flex-col items-center justify-center my-4 min-h-[78px]">
       {isLoading && !error && (
-        <div className="text-brand-text-secondary text-sm">
+        <div className="text-brand-text-secondary text-sm flex items-center gap-2">
+          <div className="w-4 h-4 border-2 border-brand-primary border-t-transparent rounded-full animate-spin"></div>
           Loading reCAPTCHA...
         </div>
       )}
       {error && (
-        <div className="text-red-400 text-sm bg-red-900/20 border border-red-500/30 px-4 py-2 rounded">
-          {error}
+        <div className="text-red-400 text-sm bg-red-900/20 border border-red-500/30 px-4 py-3 rounded-lg space-y-2 max-w-md">
+          <div className="font-semibold">⚠️ reCAPTCHA Error</div>
+          <div>{error}</div>
+          {error.includes('domain') && (
+            <div className="text-xs text-red-300/80 mt-2 pt-2 border-t border-red-500/20">
+              <strong>How to fix:</strong> Go to <a href="https://www.google.com/recaptcha/admin" target="_blank" rel="noopener noreferrer" className="underline">Google reCAPTCHA Admin</a>, 
+              select your site, and add <code className="bg-red-900/40 px-1 rounded">{window.location.hostname}</code> to the authorized domains list.
+            </div>
+          )}
         </div>
       )}
       <div ref={containerRef} className={error ? 'hidden' : ''}></div>
