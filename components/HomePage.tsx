@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Cpu, ShieldCheck, Zap, Repeat, TrendingUp, BarChart, Star, CheckCircle, Send } from 'lucide-react';
 import { getTestimonials, addTestimonial } from '../services/userDataService';
 import { Testimonial } from '../types';
+import FloatingCryptoLogos from './FloatingCryptoLogos';
 
 const Header: React.FC<{ onLogoClick: () => void; onNavigate: (view: 'login' | 'register' | 'testimonials') => void; }> = ({ onLogoClick, onNavigate }) => (
     <header 
@@ -262,6 +263,7 @@ const HomePage: React.FC<{ onNavigate: (view: 'login' | 'register' | 'homepage' 
             
             <main>
                 <section className="relative h-screen flex items-center justify-center text-center px-4 overflow-hidden">
+                    <FloatingCryptoLogos />
                     <div className="relative z-10">
                         <h1 
                             className="text-5xl sm:text-6xl md:text-8xl font-bold text-white leading-tight tracking-tighter"
