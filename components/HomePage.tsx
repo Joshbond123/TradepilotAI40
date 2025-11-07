@@ -1,10 +1,16 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Cpu, ShieldCheck, Zap, Repeat, TrendingUp, BarChart, Star, CheckCircle, Send } from 'lucide-react';
+import { Zap, Repeat, TrendingUp, BarChart, Star, CheckCircle, Send } from 'lucide-react';
 import { getTestimonials, addTestimonial } from '../services/userDataService';
 import { Testimonial } from '../types';
 import FloatingCryptoLogos from './FloatingCryptoLogos';
 import ExchangeLogosMarquee from './ExchangeLogosMarquee';
+import aiIcon from '@assets/generated_images/AI_brain_circuit_network_cb0fa216.png';
+import automatedIcon from '@assets/generated_images/Automated_24/7_mechanism_icon_d1bfdd7f.png';
+import securityIcon from '@assets/generated_images/Digital_security_shield_icon_37419890.png';
+import executionIcon from '@assets/generated_images/Lightning_speed_execution_icon_93d07088.png';
+import profitIcon from '@assets/generated_images/Profit_tracking_chart_icon_171c6370.png';
+import reportingIcon from '@assets/generated_images/Transparent_reporting_document_icon_5ea4b5e9.png';
 
 const Header: React.FC<{ onLogoClick: () => void; onNavigate: (view: 'login' | 'register' | 'testimonials') => void; }> = ({ onLogoClick, onNavigate }) => (
     <header 
@@ -221,12 +227,12 @@ const HomePage: React.FC<{ onNavigate: (view: 'login' | 'register' | 'homepage' 
     }, []);
 
     const features = [
-        { icon: <Cpu size={28} />, title: "AI-Powered Arbitrage", description: "Our machine learning algorithms scan 50+ exchanges in real-time to find and execute profitable trades." },
-        { icon: <Zap size={28} />, title: "Fully Automated", description: "Set it and forget it. TradePilot AI operates 24/7, capitalizing on market opportunities while you sleep." },
-        { icon: <ShieldCheck size={28} />, title: "Bank-Grade Security", description: "Your funds and data are protected with multi-layer encryption and industry-leading security protocols." },
-        { icon: <Repeat size={28} />, title: "Instant Execution", description: "High-frequency trading infrastructure ensures your arbitrage opportunities are seized without delay." },
-        { icon: <TrendingUp size={28} />, title: "Profit Tracking", description: "Monitor your AI's performance and track your profits with our intuitive dashboard." },
-        { icon: <BarChart size={28} />, title: "Transparent Reporting", description: "Get detailed reports on every trade, ensuring complete transparency and trust." },
+        { icon: <img src={aiIcon} alt="AI-Powered" className="w-16 h-16 object-contain" />, title: "AI-Powered Arbitrage", description: "Our machine learning algorithms scan 50+ exchanges in real-time to find and execute profitable trades." },
+        { icon: <img src={automatedIcon} alt="Fully Automated" className="w-16 h-16 object-contain" />, title: "Fully Automated", description: "Set it and forget it. TradePilot AI operates 24/7, capitalizing on market opportunities while you sleep." },
+        { icon: <img src={securityIcon} alt="Bank-Grade Security" className="w-16 h-16 object-contain" />, title: "Bank-Grade Security", description: "Your funds and data are protected with multi-layer encryption and industry-leading security protocols." },
+        { icon: <img src={executionIcon} alt="Instant Execution" className="w-16 h-16 object-contain" />, title: "Instant Execution", description: "High-frequency trading infrastructure ensures your arbitrage opportunities are seized without delay." },
+        { icon: <img src={profitIcon} alt="Profit Tracking" className="w-16 h-16 object-contain" />, title: "Profit Tracking", description: "Monitor your AI's performance and track your profits with our intuitive dashboard." },
+        { icon: <img src={reportingIcon} alt="Transparent Reporting" className="w-16 h-16 object-contain" />, title: "Transparent Reporting", description: "Get detailed reports on every trade, ensuring complete transparency and trust." },
     ];
     
     const handleTestimonialSubmit = async (e: React.FormEvent) => {
