@@ -4,6 +4,7 @@ expertMode = true
 
 [nix]
 channel = "stable-25_05"
+packages = ["imagemagick"]
 
 [workflows]
 runButton = "Project"
@@ -52,6 +53,10 @@ externalPort = 5000
 [[ports]]
 localPort = 40371
 externalPort = 3000
+
+[[ports]]
+localPort = 41047
+externalPort = 6800
 
 [[ports]]
 localPort = 42213
