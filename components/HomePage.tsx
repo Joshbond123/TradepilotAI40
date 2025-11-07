@@ -4,6 +4,7 @@ import { Cpu, ShieldCheck, Zap, Repeat, TrendingUp, BarChart, Star, CheckCircle,
 import { getTestimonials, addTestimonial } from '../services/userDataService';
 import { Testimonial } from '../types';
 import FloatingCryptoLogos from './FloatingCryptoLogos';
+import ExchangeLogosMarquee from './ExchangeLogosMarquee';
 
 const Header: React.FC<{ onLogoClick: () => void; onNavigate: (view: 'login' | 'register' | 'testimonials') => void; }> = ({ onLogoClick, onNavigate }) => (
     <header 
@@ -396,6 +397,8 @@ const HomePage: React.FC<{ onNavigate: (view: 'login' | 'register' | 'homepage' 
                         </motion.div>
                     </motion.div>
                 </Section>
+
+                <ExchangeLogosMarquee />
                 
                 <Section id="features" className="bg-brand-bg">
                     <SectionTitle subtitle="Why TradePilot" title={<>An <span className="bg-clip-text text-transparent bg-gradient-to-br from-brand-primary to-brand-secondary">Unfair</span> Advantage</>} />
