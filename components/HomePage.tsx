@@ -144,14 +144,14 @@ const FeatureCard: React.FC<{ icon: React.ReactNode, title: string, description:
             </AnimatePresence>
             <div className="relative z-10 flex flex-col items-center flex-grow">
                 <motion.div 
-                    className="inline-block p-4 bg-brand-primary/10 rounded-full text-brand-primary mb-6"
-                    animate={{ y: isHovered ? -10 : 0, scale: isHovered ? 1.1 : 1 }}
+                    className="inline-block mb-6"
+                    animate={{ y: isHovered ? -10 : 0, scale: isHovered ? 1.05 : 1 }}
                     transition={{ type: 'spring', stiffness: 300, damping: 10 }}
                 >
                     {icon}
                 </motion.div>
-                <h3 className="text-xl font-bold mt-4 text-white">{title}</h3>
-                <p className="mt-2 text-brand-text-secondary flex-grow">{description}</p>
+                <h3 className="text-xl font-bold text-white">{title}</h3>
+                <p className="mt-3 text-brand-text-secondary flex-grow">{description}</p>
             </div>
         </motion.div>
     );
@@ -227,12 +227,12 @@ const HomePage: React.FC<{ onNavigate: (view: 'login' | 'register' | 'homepage' 
     }, []);
 
     const features = [
-        { icon: <img src={aiIcon} alt="AI-Powered" className="w-16 h-16 object-contain" />, title: "AI-Powered Arbitrage", description: "Our machine learning algorithms scan 50+ exchanges in real-time to find and execute profitable trades." },
-        { icon: <img src={automatedIcon} alt="Fully Automated" className="w-16 h-16 object-contain" />, title: "Fully Automated", description: "Set it and forget it. TradePilot AI operates 24/7, capitalizing on market opportunities while you sleep." },
-        { icon: <img src={securityIcon} alt="Bank-Grade Security" className="w-16 h-16 object-contain" />, title: "Bank-Grade Security", description: "Your funds and data are protected with multi-layer encryption and industry-leading security protocols." },
-        { icon: <img src={executionIcon} alt="Instant Execution" className="w-16 h-16 object-contain" />, title: "Instant Execution", description: "High-frequency trading infrastructure ensures your arbitrage opportunities are seized without delay." },
-        { icon: <img src={profitIcon} alt="Profit Tracking" className="w-16 h-16 object-contain" />, title: "Profit Tracking", description: "Monitor your AI's performance and track your profits with our intuitive dashboard." },
-        { icon: <img src={reportingIcon} alt="Transparent Reporting" className="w-16 h-16 object-contain" />, title: "Transparent Reporting", description: "Get detailed reports on every trade, ensuring complete transparency and trust." },
+        { icon: <img src={aiIcon} alt="AI-Powered" className="w-40 h-40 object-contain" />, title: "AI-Powered Arbitrage", description: "Our machine learning algorithms scan 50+ exchanges in real-time to find and execute profitable trades." },
+        { icon: <img src={automatedIcon} alt="Fully Automated" className="w-40 h-40 object-contain" />, title: "Fully Automated", description: "Set it and forget it. TradePilot AI operates 24/7, capitalizing on market opportunities while you sleep." },
+        { icon: <img src={securityIcon} alt="Bank-Grade Security" className="w-40 h-40 object-contain" />, title: "Bank-Grade Security", description: "Your funds and data are protected with multi-layer encryption and industry-leading security protocols." },
+        { icon: <img src={executionIcon} alt="Instant Execution" className="w-40 h-40 object-contain" />, title: "Instant Execution", description: "High-frequency trading infrastructure ensures your arbitrage opportunities are seized without delay." },
+        { icon: <img src={profitIcon} alt="Profit Tracking" className="w-40 h-40 object-contain" />, title: "Profit Tracking", description: "Monitor your AI's performance and track your profits with our intuitive dashboard." },
+        { icon: <img src={reportingIcon} alt="Transparent Reporting" className="w-40 h-40 object-contain" />, title: "Transparent Reporting", description: "Get detailed reports on every trade, ensuring complete transparency and trust." },
     ];
     
     const handleTestimonialSubmit = async (e: React.FormEvent) => {
