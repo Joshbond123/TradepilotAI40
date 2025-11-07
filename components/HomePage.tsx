@@ -289,12 +289,112 @@ const HomePage: React.FC<{ onNavigate: (view: 'login' | 'register' | 'homepage' 
                     </div>
                 </section>
 
-                <Section className="bg-brand-bg">
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-                        <StatCounter to={50} suffix="+" label="Exchanges Monitored" />
-                        <StatCounter to={24000} suffix="+" label="Active Users" />
-                        <StatCounter to={2.7} decimals={1} suffix="M+" label="USD Daily Volume" />
-                    </div>
+                <Section className="bg-brand-bg relative">
+                    <div className="absolute inset-0 bg-gradient-to-b from-transparent via-brand-primary/5 to-transparent"></div>
+                    
+                    <motion.div 
+                        initial={{ opacity: 0, y: 50 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.8 }}
+                        className="relative z-10"
+                    >
+                        <div className="text-center mb-16">
+                            <motion.h2 
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: 0.2 }}
+                                className="text-3xl md:text-4xl font-bold text-white mb-3"
+                            >
+                                Trusted by <span className="bg-clip-text text-transparent bg-gradient-to-r from-brand-primary to-brand-secondary">Thousands</span> Worldwide
+                            </motion.h2>
+                            <motion.p 
+                                initial={{ opacity: 0 }}
+                                whileInView={{ opacity: 1 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: 0.3 }}
+                                className="text-brand-text-secondary"
+                            >
+                                Real-time metrics from our global trading network
+                            </motion.p>
+                        </div>
+
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                            <motion.div
+                                initial={{ opacity: 0, y: 30 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: 0.2, duration: 0.6 }}
+                                whileHover={{ y: -10, transition: { duration: 0.3 } }}
+                                className="relative group"
+                            >
+                                <div className="absolute inset-0 bg-gradient-to-br from-brand-primary/20 to-brand-secondary/20 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                                <div className="relative bg-brand-surface/30 backdrop-blur-xl border border-white/10 rounded-3xl p-8 text-center hover:border-brand-primary/50 transition-all duration-300">
+                                    <div className="inline-flex items-center justify-center w-16 h-16 bg-brand-primary/10 rounded-full mb-4">
+                                        <Repeat className="text-brand-primary" size={32} />
+                                    </div>
+                                    <StatCounter to={50} suffix="+" label="Exchanges Monitored" />
+                                    <p className="text-xs text-brand-text-secondary mt-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                        Connected to major crypto exchanges globally
+                                    </p>
+                                </div>
+                            </motion.div>
+
+                            <motion.div
+                                initial={{ opacity: 0, y: 30 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: 0.4, duration: 0.6 }}
+                                whileHover={{ y: -10, transition: { duration: 0.3 } }}
+                                className="relative group"
+                            >
+                                <div className="absolute inset-0 bg-gradient-to-br from-brand-primary/20 to-brand-secondary/20 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                                <div className="relative bg-brand-surface/30 backdrop-blur-xl border border-white/10 rounded-3xl p-8 text-center hover:border-brand-primary/50 transition-all duration-300">
+                                    <div className="inline-flex items-center justify-center w-16 h-16 bg-brand-primary/10 rounded-full mb-4">
+                                        <TrendingUp className="text-brand-primary" size={32} />
+                                    </div>
+                                    <StatCounter to={24000} suffix="+" label="Active Users" />
+                                    <p className="text-xs text-brand-text-secondary mt-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                        Growing community of smart investors
+                                    </p>
+                                </div>
+                            </motion.div>
+
+                            <motion.div
+                                initial={{ opacity: 0, y: 30 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: 0.6, duration: 0.6 }}
+                                whileHover={{ y: -10, transition: { duration: 0.3 } }}
+                                className="relative group"
+                            >
+                                <div className="absolute inset-0 bg-gradient-to-br from-brand-primary/20 to-brand-secondary/20 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                                <div className="relative bg-brand-surface/30 backdrop-blur-xl border border-white/10 rounded-3xl p-8 text-center hover:border-brand-primary/50 transition-all duration-300">
+                                    <div className="inline-flex items-center justify-center w-16 h-16 bg-brand-primary/10 rounded-full mb-4">
+                                        <BarChart className="text-brand-primary" size={32} />
+                                    </div>
+                                    <StatCounter to={2.7} decimals={1} suffix="M+" label="USD Daily Volume" />
+                                    <p className="text-xs text-brand-text-secondary mt-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                        Automated trades executed every day
+                                    </p>
+                                </div>
+                            </motion.div>
+                        </div>
+
+                        <motion.div
+                            initial={{ opacity: 0, scale: 0.9 }}
+                            whileInView={{ opacity: 1, scale: 1 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: 0.8 }}
+                            className="mt-12 text-center"
+                        >
+                            <div className="inline-flex items-center gap-2 px-6 py-3 bg-brand-surface/20 backdrop-blur-md border border-white/10 rounded-full">
+                                <Zap className="text-brand-primary" size={20} />
+                                <span className="text-sm text-brand-text-secondary">Live metrics • Updated in real-time</span>
+                            </div>
+                        </motion.div>
+                    </motion.div>
                 </Section>
                 
                 <Section id="features" className="bg-brand-bg">
