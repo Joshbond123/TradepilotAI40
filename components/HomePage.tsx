@@ -13,11 +13,20 @@ import profitIcon from '@assets/generated_images/Profit_tracking_chart_icon_171c
 import reportingIcon from '@assets/generated_images/Transparent_reporting_document_icon_5ea4b5e9.webp';
 
 const Header: React.FC<{ onLogoClick: () => void; onNavigate: (view: 'login' | 'register' | 'testimonials') => void; }> = ({ onLogoClick, onNavigate }) => (
-    <header 
+    <motion.header 
+      initial={{ y: -100, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
       className="fixed top-0 left-0 right-0 z-50 py-4 px-4 sm:px-8"
     >
       <div className="max-w-7xl mx-auto flex justify-between items-center p-4 bg-brand-surface/20 backdrop-blur-lg border border-white/10 rounded-full shadow-lg">
-        <div onClick={onLogoClick} className="flex items-center gap-2 cursor-pointer">
+        <motion.div 
+          onClick={onLogoClick} 
+          className="flex items-center gap-2 cursor-pointer"
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          transition={{ type: "spring", stiffness: 400, damping: 17 }}
+        >
           <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="url(#logoGradient)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
             <path d="M2 17L12 22L22 17" stroke="url(#logoGradient)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
@@ -30,21 +39,46 @@ const Header: React.FC<{ onLogoClick: () => void; onNavigate: (view: 'login' | '
             </defs>
           </svg>
           <span className="font-bold text-xl text-white">TradePilot AI</span>
-        </div>
+        </motion.div>
         <nav className="hidden md:flex items-center gap-8 text-brand-text-secondary font-semibold">
-          <a href="#features" className="hover:text-white transition-colors duration-300">Features</a>
-          <a href="#testimonials" className="hover:text-white transition-colors duration-300">Reviews</a>
+          <motion.a 
+            href="#features" 
+            className="hover:text-white transition-colors duration-300"
+            whileHover={{ scale: 1.05, y: -2 }}
+            transition={{ type: "spring", stiffness: 400, damping: 17 }}
+          >
+            Features
+          </motion.a>
+          <motion.a 
+            href="#testimonials" 
+            className="hover:text-white transition-colors duration-300"
+            whileHover={{ scale: 1.05, y: -2 }}
+            transition={{ type: "spring", stiffness: 400, damping: 17 }}
+          >
+            Reviews
+          </motion.a>
         </nav>
         <div className="flex items-center gap-2">
-            <button onClick={() => onNavigate('login')} className="hidden sm:block px-6 py-2 text-brand-text-secondary font-bold rounded-full transition-all duration-300 hover:text-white hover:bg-white/10">
+            <motion.button 
+              onClick={() => onNavigate('login')} 
+              className="hidden sm:block px-6 py-2 text-brand-text-secondary font-bold rounded-full transition-all duration-300 hover:text-white hover:bg-white/10"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
                 Login
-            </button>
-            <button onClick={() => onNavigate('register')} className="px-6 py-2 bg-brand-primary text-brand-bg font-bold rounded-full transition-all duration-300 hover:scale-105 hover:shadow-[0_0_20px_theme(colors.brand.primary)]">
+            </motion.button>
+            <motion.button 
+              onClick={() => onNavigate('register')} 
+              className="px-6 py-2 bg-brand-primary text-brand-bg font-bold rounded-full transition-all duration-300"
+              whileHover={{ scale: 1.08, boxShadow: "0 0 30px rgba(0, 245, 255, 0.6)" }}
+              whileTap={{ scale: 0.95 }}
+              transition={{ type: "spring", stiffness: 400, damping: 17 }}
+            >
             Get Started
-            </button>
+            </motion.button>
         </div>
       </div>
-    </header>
+    </motion.header>
 );
 
 const Section: React.FC<{ children: React.ReactNode; id?: string; className?: string }> = ({ children, id, className }) => (
@@ -57,10 +91,32 @@ const Section: React.FC<{ children: React.ReactNode; id?: string; className?: st
 );
 
 const SectionTitle: React.FC<{ subtitle: string; title: React.ReactNode; }> = ({ subtitle, title }) => (
-    <div className="text-center mb-16">
-        <p className="text-lg text-brand-primary font-bold uppercase tracking-widest">{subtitle}</p>
-        <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold mt-2 text-white">{title}</h2>
-    </div>
+    <motion.div 
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+        className="text-center mb-16"
+    >
+        <motion.p 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2, duration: 0.5 }}
+            className="text-lg text-brand-primary font-bold uppercase tracking-widest"
+        >
+            {subtitle}
+        </motion.p>
+        <motion.h2 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.3, duration: 0.6 }}
+            className="text-4xl sm:text-5xl md:text-6xl font-bold mt-2 text-white"
+        >
+            {title}
+        </motion.h2>
+    </motion.div>
 );
 
 const StatCounter: React.FC<{ to: number; label: string; suffix?: string; decimals?: number }> = ({ to, label, suffix = '', decimals = 0 }) => {
@@ -120,24 +176,30 @@ const StatCounter: React.FC<{ to: number; label: string; suffix?: string; decima
     );
 };
 
-const FeatureCard: React.FC<{ icon: React.ReactNode, title: string, description: string }> = ({ icon, title, description }) => {
+const FeatureCard: React.FC<{ icon: React.ReactNode, title: string, description: string, index: number }> = ({ icon, title, description, index }) => {
     const ref = useRef<HTMLDivElement>(null);
     const [isHovered, setIsHovered] = useState(false);
 
     return (
         <motion.div
             ref={ref}
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ delay: index * 0.1, duration: 0.5, ease: "easeOut" }}
             onHoverStart={() => setIsHovered(true)}
             onHoverEnd={() => setIsHovered(false)}
+            whileHover={{ y: -8, transition: { duration: 0.3 } }}
             className="relative p-8 rounded-3xl border border-white/10 bg-brand-surface/20 backdrop-blur-md text-center h-full flex flex-col items-center"
             style={{ transformStyle: 'preserve-3d', perspective: '1000px' }}
         >
             <AnimatePresence>
             {isHovered && (
                  <motion.div 
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.8 }}
+                    transition={{ duration: 0.3 }}
                     className="absolute -inset-px rounded-3xl bg-gradient-to-br from-brand-primary to-brand-secondary blur-lg opacity-50"
                  />
             )}
@@ -145,12 +207,22 @@ const FeatureCard: React.FC<{ icon: React.ReactNode, title: string, description:
             <div className="relative z-10 flex flex-col items-center flex-grow">
                 <motion.div 
                     className="inline-block mb-6"
-                    animate={{ y: isHovered ? -10 : 0, scale: isHovered ? 1.05 : 1 }}
-                    transition={{ type: 'spring', stiffness: 300, damping: 10 }}
+                    animate={{ 
+                        y: isHovered ? -10 : 0, 
+                        scale: isHovered ? 1.1 : 1,
+                        rotateY: isHovered ? 5 : 0
+                    }}
+                    transition={{ type: 'spring', stiffness: 300, damping: 15 }}
                 >
                     {icon}
                 </motion.div>
-                <h3 className="text-xl font-bold text-white">{title}</h3>
+                <motion.h3 
+                    className="text-xl font-bold text-white"
+                    animate={{ color: isHovered ? "#00f5ff" : "#ffffff" }}
+                    transition={{ duration: 0.3 }}
+                >
+                    {title}
+                </motion.h3>
                 <p className="mt-3 text-brand-text-secondary flex-grow">{description}</p>
             </div>
         </motion.div>
@@ -187,20 +259,31 @@ const StarRatingInput: React.FC<{ rating: number; setRating: (rating: number) =>
     </div>
 );
 
-const TestimonialCard: React.FC<{ testimonial: Testimonial }> = ({ testimonial }) => {
+const TestimonialCard: React.FC<{ testimonial: Testimonial; index: number }> = ({ testimonial, index }) => {
     return (
-        <div className="h-full bg-brand-surface/30 backdrop-blur-xl border border-white/10 rounded-3xl p-8 flex flex-col text-left shadow-lg transition-all duration-300 hover:border-brand-primary/50 hover:-translate-y-1">
+        <motion.div 
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ delay: index * 0.1, duration: 0.5, ease: "easeOut" }}
+            whileHover={{ y: -6, scale: 1.02, borderColor: "rgba(0, 245, 255, 0.5)" }}
+            className="h-full bg-brand-surface/30 backdrop-blur-xl border border-white/10 rounded-3xl p-8 flex flex-col text-left shadow-lg transition-all duration-300"
+        >
             <div className="flex items-center gap-4 mb-4">
-                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-brand-primary to-brand-secondary flex items-center justify-center font-bold text-brand-bg text-xl">
+                <motion.div 
+                    whileHover={{ scale: 1.1, rotate: 5 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                    className="w-12 h-12 rounded-full bg-gradient-to-br from-brand-primary to-brand-secondary flex items-center justify-center font-bold text-brand-bg text-xl"
+                >
                     {testimonial.name?.charAt(0) || 'A'}
-                </div>
+                </motion.div>
                 <div>
                     <p className="font-bold text-white text-lg">{testimonial.name || 'Anonymous'}</p>
                     <StarRating rating={testimonial.rating} />
                 </div>
             </div>
             <p className="text-brand-text-secondary italic my-2 flex-grow">"{testimonial.text}"</p>
-        </div>
+        </motion.div>
     );
 };
 
@@ -271,29 +354,54 @@ const HomePage: React.FC<{ onNavigate: (view: 'login' | 'register' | 'homepage' 
             <main>
                 <section className="relative h-screen flex items-center justify-center text-center px-4 overflow-hidden">
                     <FloatingCryptoLogos />
-                    <div className="relative z-10">
-                        <h1 
+                    <motion.div 
+                        initial={{ opacity: 0, y: 40 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.8, delay: 0.3 }}
+                        className="relative z-10"
+                    >
+                        <motion.h1 
+                            initial={{ opacity: 0, y: 30 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.8, delay: 0.5 }}
                             className="text-5xl sm:text-6xl md:text-8xl font-bold text-white leading-tight tracking-tighter"
                             style={{ textShadow: '0 0 30px rgba(255, 255, 255, 0.3)' }}
                         >
                             The Future of <br/>
-                            <span className="bg-clip-text text-transparent bg-gradient-to-br from-brand-primary to-brand-secondary">
+                            <motion.span 
+                                initial={{ opacity: 0, scale: 0.9 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                transition={{ duration: 0.8, delay: 0.7 }}
+                                className="bg-clip-text text-transparent bg-gradient-to-br from-brand-primary to-brand-secondary"
+                            >
                                 Intelligent Trading
-                            </span>
-                        </h1>
-                        <p 
+                            </motion.span>
+                        </motion.h1>
+                        <motion.p 
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.6, delay: 0.9 }}
                             className="mt-6 max-w-2xl mx-auto text-lg text-brand-text-secondary"
                         >
                             TradePilot AI executes thousands of arbitrage trades per day, fully automated, across 50+ exchanges. Your passive income journey starts here.
-                        </p>
-                        <div
+                        </motion.p>
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.6, delay: 1.1 }}
                             className="mt-10 flex justify-center items-center gap-4"
                         >
-                             <button onClick={() => onNavigate('register')} className="px-8 py-4 bg-brand-primary text-brand-bg font-bold rounded-full text-lg transition-all duration-300 hover:scale-105 hover:shadow-[0_0_30px_theme(colors.brand.primary)]">
+                             <motion.button 
+                                onClick={() => onNavigate('register')} 
+                                className="px-8 py-4 bg-brand-primary text-brand-bg font-bold rounded-full text-lg transition-all duration-300"
+                                whileHover={{ scale: 1.08, boxShadow: "0 0 40px rgba(0, 245, 255, 0.7)" }}
+                                whileTap={{ scale: 0.95 }}
+                                transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                            >
                                 Start Earning Now
-                            </button>
-                        </div>
-                    </div>
+                            </motion.button>
+                        </motion.div>
+                    </motion.div>
                 </section>
 
                 <Section className="bg-brand-bg relative">
@@ -409,9 +517,9 @@ const HomePage: React.FC<{ onNavigate: (view: 'login' | 'register' | 'homepage' 
                 <Section id="features" className="bg-brand-bg">
                     <SectionTitle subtitle="Why TradePilot" title={<>An <span className="bg-clip-text text-transparent bg-gradient-to-br from-brand-primary to-brand-secondary">Unfair</span> Advantage</>} />
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        {features.map((feature) => (
+                        {features.map((feature, index) => (
                             <div key={feature.title}>
-                                <FeatureCard {...feature} />
+                                <FeatureCard {...feature} index={index} />
                             </div>
                         ))}
                     </div>
@@ -467,20 +575,31 @@ const HomePage: React.FC<{ onNavigate: (view: 'login' | 'register' | 'homepage' 
                     </div>
                     
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        {testimonials.map((testimonial) => (
+                        {testimonials.map((testimonial, index) => (
                             <div 
                                 key={testimonial.id}
                                 className="h-full"
                             >
-                                <TestimonialCard testimonial={testimonial} />
+                                <TestimonialCard testimonial={testimonial} index={index} />
                             </div>
                         ))}
                     </div>
-                    <div className="text-center mt-12">
-                        <button onClick={() => onNavigate('testimonials')} className="px-8 py-3 bg-brand-surface/50 border border-white/20 text-white font-bold rounded-full transition-all duration-300 hover:bg-white/10 hover:border-white/40">
+                    <motion.div 
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.6, duration: 0.5 }}
+                        className="text-center mt-12"
+                    >
+                        <motion.button 
+                            onClick={() => onNavigate('testimonials')} 
+                            className="px-8 py-3 bg-brand-surface/50 border border-white/20 text-white font-bold rounded-full transition-all duration-300"
+                            whileHover={{ scale: 1.05, backgroundColor: "rgba(255, 255, 255, 0.1)", borderColor: "rgba(255, 255, 255, 0.4)" }}
+                            whileTap={{ scale: 0.95 }}
+                        >
                             View All Testimonials
-                        </button>
-                    </div>
+                        </motion.button>
+                    </motion.div>
                 </Section>
             </main>
 
