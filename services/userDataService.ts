@@ -122,7 +122,7 @@ export const createInitialUserData = async (user: User, referralCode?: string): 
         }
     }
 
-    const referralCode = `${user.name.toLowerCase().replace(/\s/g, '')}${user.id.slice(-4)}`;
+    const userReferralCode = `${user.name.toLowerCase().replace(/\s/g, '')}${user.id.slice(-4)}`;
     
     const initialData: UserData = {
         id: user.id,
@@ -140,7 +140,7 @@ export const createInitialUserData = async (user: User, referralCode?: string): 
         referrals: {
             count: 0,
             earnings: 0,
-            code: referralCode,
+            code: userReferralCode,
         },
         activePlan: undefined,
         sessions: [],
