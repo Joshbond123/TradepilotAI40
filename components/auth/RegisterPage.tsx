@@ -19,6 +19,7 @@ const RegisterPage: React.FC<RegisterPageProps> = ({ onNavigate, onRegisterSucce
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [referralCode, setReferralCode] = useState('');
+  const [isReferralLocked, setIsReferralLocked] = useState(false);
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [recaptchaToken, setRecaptchaToken] = useState<string>('');
@@ -29,6 +30,7 @@ const RegisterPage: React.FC<RegisterPageProps> = ({ onNavigate, onRegisterSucce
     const refCode = params.get('ref');
     if (refCode) {
       setReferralCode(refCode);
+      setIsReferralLocked(true);
     }
   }, []);
 
@@ -78,7 +80,7 @@ const RegisterPage: React.FC<RegisterPageProps> = ({ onNavigate, onRegisterSucce
           isVerified: true,
       };
 
-      await createInitialUserData(newUser);
+      await createInitialUserData(newUser, referralCode || undefined);
       onRegisterSuccess(newUser);
       setIsLoading(false);
     } catch (error) {
@@ -110,7 +112,19 @@ const RegisterPage: React.FC<RegisterPageProps> = ({ onNavigate, onRegisterSucce
           <input type="email" placeholder="Email Address" value={email} onChange={(e) => setEmail(e.target.value)} className="w-full p-3 bg-brand-bg/50 border-2 border-white/10 rounded-lg text-white placeholder-brand-text-secondary transition-all duration-300 glow-input" />
           <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} className="w-full p-3 bg-brand-bg/50 border-2 border-white/10 rounded-lg text-white placeholder-brand-text-secondary transition-all duration-300 glow-input" />
           <input type="password" placeholder="Confirm Password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} className="w-full p-3 bg-brand-bg/50 border-2 border-white/10 rounded-lg text-white placeholder-brand-text-secondary transition-all duration-300 glow-input" />
-          <input type="text" placeholder="Referral Code (Optional)" value={referralCode} onChange={(e) => setReferralCode(e.target.value)} className="w-full p-3 bg-brand-bg/50 border-2 border-white/10 rounded-lg text-white placeholder-brand-text-secondary transition-all duration-300 glow-input" />
+          <div>
+            <input 
+              type="text" 
+              placeholder="Referral Code (Optional)" 
+              value={referralCode} 
+              onChange={(e) => !isReferralLocked && setReferralCode(e.target.value)} 
+              readOnly={isReferralLocked}
+              className={`w-full p-3 bg-brand-bg/50 border-2 border-white/10 rounded-lg text-white placeholder-brand-text-secondary transition-all duration-300 glow-input ${isReferralLocked ? 'opacity-75 cursor-not-allowed' : ''}`} 
+            />
+            {isReferralLocked && (
+              <p className="text-xs text-brand-primary mt-1">Referral code auto-filled from your invitation link</p>
+            )}
+          </div>
           
           {error && <p className="text-red-400 text-sm text-center">{error}</p>}
           

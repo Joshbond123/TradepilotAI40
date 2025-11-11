@@ -13,11 +13,12 @@ export interface User {
   registrationDate?: string;
   notificationPermission?: 'granted' | 'denied' | 'default';
   isVerified: boolean;
+  referredBy?: string;
 }
 
 export interface Transaction {
   id:string;
-  type: 'Deposit' | 'Withdrawal' | 'Profit' | 'Investment';
+  type: 'Deposit' | 'Withdrawal' | 'Profit' | 'Investment' | 'Referral Commission';
   amount: number;
   date: string;
   status: 'Pending' | 'Confirmed' | 'Failed';

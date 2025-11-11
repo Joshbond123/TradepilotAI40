@@ -99,10 +99,20 @@ export const saveUserData = async (userData: UserData): Promise<void> => {
     }
 };
 
-export const createInitialUserData = async (user: User): Promise<UserData> => {
+export const createInitialUserData = async (user: User, referralCode?: string): Promise<UserData> => {
     const existingData = await getUserData(user.id);
     if (existingData) {
         return existingData;
+    }
+
+    let referrerId: string | undefined = undefined;
+    if (referralCode) {
+        const referrer = await findUserByReferralCode(referralCode);
+        if (referrer) {
+            referrerId = referrer.id;
+            referrer.referrals.count += 1;
+            await saveUserData(referrer);
+        }
     }
 
     const initialData: UserData = {
@@ -116,11 +126,12 @@ export const createInitialUserData = async (user: User): Promise<UserData> => {
         hasSeenWelcome: user.hasSeenWelcome,
         registrationDate: new Date().toISOString(),
         isVerified: true,
+        referredBy: referrerId,
         transactions: [],
         referrals: {
             count: 0,
             earnings: 0,
-            link: `${window.location.origin}/ref/${user.name.toLowerCase().replace(/\s/g, '')}${user.id.slice(-4)}`,
+            link: `${window.location.origin}/?ref=${user.name.toLowerCase().replace(/\s/g, '')}${user.id.slice(-4)}`,
         },
         activePlan: undefined,
         sessions: [],
@@ -180,6 +191,34 @@ export const addTransaction = async (
     userData.balance = newBalance;
     
     await saveUserData(userData);
+
+    if (newTransaction.type === 'Deposit' && newTransaction.status === 'Confirmed' && userData.referredBy) {
+        try {
+            const referrer = await getUserData(userData.referredBy);
+            if (referrer) {
+                const commissionAmount = (newTransaction.usdValue || newTransaction.amount) * 0.1;
+                
+                const commissionTransaction: Transaction = {
+                    id: `tx-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
+                    type: 'Referral Commission',
+                    amount: commissionAmount,
+                    date: new Date().toISOString(),
+                    status: 'Confirmed',
+                    asset: 'USD',
+                    usdValue: commissionAmount,
+                };
+
+                referrer.balance += commissionAmount;
+                referrer.referrals.earnings += commissionAmount;
+                referrer.transactions.push(commissionTransaction);
+                
+                await saveUserData(referrer);
+            }
+        } catch (error) {
+            console.error('Failed to process referral commission:', error);
+        }
+    }
+
     return userData;
 };
 
@@ -354,6 +393,23 @@ export const getAllUsersData = async (): Promise<UserData[]> => {
     } catch (error) {
         console.error("Failed to get all users:", error);
         return [];
+    }
+};
+
+export const findUserByReferralCode = async (referralCode: string): Promise<UserData | null> => {
+    try {
+        const allUsers = await getAllUsersData();
+        for (const user of allUsers) {
+            const userReferralCode = `${user.name.toLowerCase().replace(/\s/g, '')}${user.id.slice(-4)}`;
+            if (userReferralCode === referralCode) {
+                return user;
+            }
+        }
+        console.warn(`No user found with referral code: ${referralCode}`);
+        return null;
+    } catch (error) {
+        console.error("Failed to find user by referral code:", error);
+        return null;
     }
 };
 

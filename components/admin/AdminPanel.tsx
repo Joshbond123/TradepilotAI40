@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { LayoutDashboard, Users, ArrowDownToLine, ArrowUpFromLine, Wallet, Settings, LogOut, X, Menu, Search, Edit2, Trash2, Save, FileDown, RefreshCw, PlusCircle, MessageSquare, Mail, Eye, Bot, Star } from 'lucide-react';
+import { LayoutDashboard, Users, ArrowDownToLine, ArrowUpFromLine, Wallet, Settings, LogOut, X, Menu, Search, Edit2, Trash2, Save, FileDown, RefreshCw, PlusCircle, MessageSquare, Mail, Eye, Bot, Star, Copy } from 'lucide-react';
 import AuthBackground from '../auth/AuthBackground';
 import { UserData, AdminTransaction, SystemSettings, WalletConfig, Wallet as WalletType, Message, Testimonial } from '../../types';
 import * as userDataService from '../../services/userDataService';
@@ -686,7 +686,23 @@ const WalletSettings: React.FC = () => {
                         <h3 className="text-xl font-bold mb-4 text-brand-primary">{wallet.name} ({wallet.symbol})</h3>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div className="space-y-4">
-                                <div><label className="text-sm text-brand-text-secondary">Address</label><input type="text" value={wallet.address} onChange={e => handleWalletChange(wallet.symbol, 'address', e.target.value)} className="w-full mt-1 p-2 bg-brand-bg rounded border border-white/20"/></div>
+                                <div>
+                                    <label className="text-sm text-brand-text-secondary">Address</label>
+                                    <div className="flex items-center gap-2 mt-1">
+                                        <input type="text" value={wallet.address} onChange={e => handleWalletChange(wallet.symbol, 'address', e.target.value)} className="flex-1 p-2 bg-brand-bg rounded border border-white/20"/>
+                                        <button 
+                                            onClick={() => {
+                                                navigator.clipboard.writeText(wallet.address);
+                                                setSaveStatus('Address copied!');
+                                                setTimeout(() => setSaveStatus(''), 2000);
+                                            }}
+                                            className="p-2 bg-brand-primary/20 hover:bg-brand-primary/40 text-brand-primary rounded border border-brand-primary/30 transition-colors"
+                                            title="Copy address"
+                                        >
+                                            <Copy size={18} />
+                                        </button>
+                                    </div>
+                                </div>
                                 <div><label className="text-sm text-brand-text-secondary">Network</label><input type="text" value={wallet.network} onChange={e => handleWalletChange(wallet.symbol, 'network', e.target.value)} className="w-full mt-1 p-2 bg-brand-bg rounded border border-white/20"/></div>
                                 <div><label className="text-sm text-brand-text-secondary">Min Withdrawal ({wallet.symbol})</label><input type="number" step="any" value={wallet.minWithdrawal || ''} onChange={e => handleWalletChange(wallet.symbol, 'minWithdrawal', e.target.value)} className="w-full mt-1 p-2 bg-brand-bg rounded border border-white/20"/></div>
                                 <div><label className="text-sm text-brand-text-secondary">Withdrawal Fee ({wallet.symbol})</label><input type="number" step="any" value={wallet.withdrawalFee || ''} onChange={e => handleWalletChange(wallet.symbol, 'withdrawalFee', e.target.value)} className="w-full mt-1 p-2 bg-brand-bg rounded border border-white/20"/></div>
