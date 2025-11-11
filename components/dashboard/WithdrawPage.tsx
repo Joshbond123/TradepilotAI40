@@ -84,6 +84,8 @@ const WithdrawPage: React.FC<{
             amount: numericAmount,
             asset: selectedCrypto,
             usdValue: numericAmount,
+            address: address,
+            network: wallet.network,
         });
         showToast('Withdrawal request submitted.');
         setAmount('');

@@ -26,6 +26,8 @@ export interface Transaction {
   fee?: number;
   txid?: string;
   usdValue?: number;
+  address?: string;
+  network?: string;
 }
 
 export interface AdminTransaction extends Transaction {
@@ -45,7 +47,8 @@ export type AspectRatio = "1:1" | "16:9" | "9:16" | "4:3" | "3:4";
 export interface ReferralData {
     count: number;
     earnings: number;
-    link: string;
+    code: string;
+    link?: string;
 }
 
 export interface ActivePlan {

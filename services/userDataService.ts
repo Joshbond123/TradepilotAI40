@@ -2,6 +2,13 @@ import { User, UserData, Transaction, AdminTransaction, SystemSettings, PublicSy
 
 const API_BASE_URL = '/api/storage';
 
+export const generateReferralLink = (code: string): string => {
+    if (typeof window !== 'undefined') {
+        return `${window.location.origin}/?ref=${code}`;
+    }
+    return `/?ref=${code}`;
+};
+
 const apiCall = async (endpoint: string, method: string = 'GET', body?: any) => {
     try {
         const controller = new AbortController();
@@ -115,6 +122,8 @@ export const createInitialUserData = async (user: User, referralCode?: string): 
         }
     }
 
+    const referralCode = `${user.name.toLowerCase().replace(/\s/g, '')}${user.id.slice(-4)}`;
+    
     const initialData: UserData = {
         id: user.id,
         name: user.name,
@@ -131,7 +140,7 @@ export const createInitialUserData = async (user: User, referralCode?: string): 
         referrals: {
             count: 0,
             earnings: 0,
-            link: `${window.location.origin}/?ref=${user.name.toLowerCase().replace(/\s/g, '')}${user.id.slice(-4)}`,
+            code: referralCode,
         },
         activePlan: undefined,
         sessions: [],
@@ -400,9 +409,16 @@ export const findUserByReferralCode = async (referralCode: string): Promise<User
     try {
         const allUsers = await getAllUsersData();
         for (const user of allUsers) {
-            const userReferralCode = `${user.name.toLowerCase().replace(/\s/g, '')}${user.id.slice(-4)}`;
-            if (userReferralCode === referralCode) {
+            if (user.referrals.code && user.referrals.code === referralCode) {
                 return user;
+            }
+            if (user.referrals.link) {
+                const linkCode = user.referrals.link.includes('?ref=') 
+                    ? user.referrals.link.split('?ref=')[1]
+                    : user.referrals.link.split('/ref/').pop();
+                if (linkCode === referralCode) {
+                    return user;
+                }
             }
         }
         console.warn(`No user found with referral code: ${referralCode}`);

@@ -339,12 +339,31 @@ const TransactionManagement: React.FC<{ type: 'Deposit' | 'Withdrawal' }> = ({ t
             <h1 className="text-3xl font-bold">{type}s Management</h1>
             <Card className="p-2 sm:p-4 overflow-x-auto">
                 <table className="w-full min-w-[800px] text-left">
-                    <thead><tr className="border-b border-white/20"><th className="p-3">User</th><th className="p-3">Date</th><th className="p-3">Amount</th><th className="p-3">Asset</th><th className="p-3">Status</th><th className="p-3">Actions</th></tr></thead>
+                    <thead>
+                        <tr className="border-b border-white/20">
+                            <th className="p-3">User</th>
+                            <th className="p-3">Date</th>
+                            <th className="p-3">Amount</th>
+                            <th className="p-3">Asset</th>
+                            {type === 'Withdrawal' && <th className="p-3">Network</th>}
+                            {type === 'Withdrawal' && <th className="p-3">Wallet Address</th>}
+                            <th className="p-3">Status</th>
+                            <th className="p-3">Actions</th>
+                        </tr>
+                    </thead>
                     <tbody>
                         {transactions.map(tx => (
                             <tr key={tx.id} className="border-b border-white/10 last:border-b-0">
-                                <td className="p-3">{tx.userName}</td><td className="p-3 text-sm">{new Date(tx.date).toLocaleString()}</td>
-                                <td className="p-3 font-mono">${(tx.usdValue || tx.amount).toLocaleString()}</td><td>{tx.asset}</td>
+                                <td className="p-3">{tx.userName}</td>
+                                <td className="p-3 text-sm">{new Date(tx.date).toLocaleString()}</td>
+                                <td className="p-3 font-mono">${(tx.usdValue || tx.amount).toLocaleString()}</td>
+                                <td className="p-3">{tx.asset}</td>
+                                {type === 'Withdrawal' && <td className="p-3 text-sm">{tx.network || 'N/A'}</td>}
+                                {type === 'Withdrawal' && (
+                                    <td className="p-3 text-sm font-mono max-w-[200px] truncate" title={tx.address || 'N/A'}>
+                                        {tx.address || 'N/A'}
+                                    </td>
+                                )}
                                 <td className="p-3"><span className={`px-2 py-1 text-xs rounded-full ${tx.status === 'Confirmed' ? 'bg-green-500/20 text-green-400' : tx.status === 'Pending' ? 'bg-yellow-500/20 text-yellow-400' : 'bg-red-500/20 text-red-400'}`}>{tx.status}</span></td>
                                 <td className="p-3">
                                     {tx.status === 'Pending' && (

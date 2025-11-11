@@ -4,15 +4,17 @@ import { UserData } from '../../types';
 import DashboardPageLayout, { InteractiveCard } from './DashboardPageLayout';
 import { Users, Copy } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { generateReferralLink } from '../../services/userDataService';
 
 const formatCurrency = (value: number) => `$${value.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 
 const ReferralsPage: React.FC<{ userData: UserData; showToast: (msg: string) => void }> = ({ userData, showToast }) => {
     const { referrals } = userData;
+    const referralLink = referrals.code ? generateReferralLink(referrals.code) : (referrals.link || '');
 
     const handleCopy = () => {
-        if (referrals.link) {
-            navigator.clipboard.writeText(referrals.link);
+        if (referralLink) {
+            navigator.clipboard.writeText(referralLink);
             showToast('Referral link copied!');
         }
     };
@@ -40,8 +42,8 @@ const ReferralsPage: React.FC<{ userData: UserData; showToast: (msg: string) => 
                 <InteractiveCard className="p-6">
                     <h3 className="font-bold text-white text-lg mb-4">Your Unique Referral Link</h3>
                     <div className="flex items-center bg-brand-bg border border-white/20 rounded-lg p-2">
-                        <input type="text" readOnly value={referrals.link} className="w-full bg-transparent outline-none p-2 text-brand-text-secondary font-mono text-sm" />
-                        <button onClick={handleCopy} className="p-2 text-white hover:text-brand-primary transition-colors" disabled={!referrals.link}><Copy /></button>
+                        <input type="text" readOnly value={referralLink} className="w-full bg-transparent outline-none p-2 text-brand-text-secondary font-mono text-sm" />
+                        <button onClick={handleCopy} className="p-2 text-white hover:text-brand-primary transition-colors" disabled={!referralLink}><Copy /></button>
                     </div>
                 </InteractiveCard>
             </motion.div>
