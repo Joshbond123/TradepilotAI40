@@ -60,8 +60,14 @@ TradePilot AI is an advanced AI-powered crypto arbitrage trading platform with a
 - Dashboard with trading overview
 - Investment plans and profit tracking
 - Deposit/withdrawal management
-- Referral system
+- **Referral system with 10% commission**:
+  - Automatic referral link generation for each user
+  - Auto-fill and lock referral code from invitation links
+  - 10% commission on all referred user deposits
+  - Real-time commission crediting to referrer's balance
+  - Referral earnings tracking and history
 - Admin panel for user management
+  - Copy-to-clipboard for wallet addresses
 - AI-powered chatbot
 - 3D visualizations and animations
 - Responsive mobile design
@@ -129,6 +135,16 @@ The application is configured for autoscale deployment on Replit:
 - Port: 5000 (frontend), 3000 (backend API)
 
 ## Recent Changes
+- **2025-11-11**: Referral system enhancements and admin improvements
+  - **REFERRAL COMMISSION**: Implemented automatic 10% commission on all referred user deposits
+  - **AUTO-FILL REFERRAL CODE**: Registration form now auto-fills and locks referral code from invitation links
+  - **REFERRAL TRACKING**: Added `referredBy` field to user data to track referrer relationships
+  - **COMMISSION TRANSACTIONS**: Added 'Referral Commission' transaction type for transparent tracking
+  - **ADMIN WALLET COPY**: Added copy-to-clipboard button for wallet addresses in admin panel
+  - **REFERRAL LINK FORMAT**: Updated referral links from `/ref/{code}` to `/?ref={code}` query parameter format
+  - **DATA MIGRATION**: Automatically migrated existing users' referral links to new format
+  - **COMMISSION LOGIC**: Real-time crediting of 10% to referrer's balance and earnings on confirmed deposits
+  - All referral features now fully functional with proper error handling and logging
 - **2025-11-03**: Reviews system and permanent welcome video implementation
   - **NEW FILE STORAGE**: Added reviews.json (50 unique reviews), profits.json, and activity.log to storage system
   - **REVIEWS PAGINATION**: Testimonials page displays 7 reviews per page with Next/Previous navigation
